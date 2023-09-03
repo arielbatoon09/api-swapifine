@@ -20,6 +20,10 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::post('/admin/login', [AdminAuthController::class, 'adminLogin']);
 
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/admin/logout', [AdminAuthController::class, 'logout']);
+});
+
 Route::post('/register', [UserAuthController::class, 'register']);
 Route::post('/login', [UserAuthController::class, 'login']);    
 

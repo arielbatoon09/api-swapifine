@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Auth\Notifications\VerifyEmail;
-use Illuminate\Notifications\Notification;
+// use Illuminate\Auth\Notifications\VerifyEmail;
+// use Illuminate\Notifications\Notification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
