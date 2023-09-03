@@ -86,7 +86,7 @@ class UserAuthController extends Controller
                     return response([
                         'source' => 'invalidCredentials',
                         'status' => 'error',
-                        'message' => "Invalid Credentials"
+                        'message' => "Invalid Email or Password"
                     ]);
                 } else {
                     $token = $request->user()->createToken('pDE6g70A=ZE7medrby5O3V$S22%3=R&9h')->plainTextToken;
