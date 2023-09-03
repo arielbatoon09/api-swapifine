@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\UserAuthController;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\AdminAuthController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('/admin/login', [AdminAuthController::class, 'adminLogin']);
 
 Route::post('/register', [UserAuthController::class, 'register']);
-Route::post('/login', [UserAuthController::class, 'login']);
+Route::post('/login', [UserAuthController::class, 'login']);    
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/user', [UserAuthController::class, 'user']);
