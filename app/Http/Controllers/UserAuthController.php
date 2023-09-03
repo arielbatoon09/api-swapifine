@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Events\Registered;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -26,7 +27,8 @@ class UserAuthController extends Controller
                     if (!$getEmail) {
                         if (strlen($request->password) >= 6) {
                             if ($request->password == $request->confirmPassword) {
-                                User::create([
+
+                                $user = User::create([
                                     'fullname' => $request->input('fullname'),
                                     'email' => $request->input('email'),
                                     'password' => $request->input('password'),
@@ -34,10 +36,17 @@ class UserAuthController extends Controller
                                     'credits_amount' => $request->input('credits_amount', 0),
                                     'flag' => $request->input('flag', 0),
                                 ]);
+
+                                $token = $user->createToken('pDE6g70A=ZE7medrby5O3V$S22%3=R&9h')->plainTextToken;
+                                $cookie = cookie('jwt', $token, 60 * 24); // 1 Day Cookie Expiration
+
+                                event(new Registered($user));
+
                                 return response([
                                     'status' => 'success',
-                                    'message' => "Successfuly Registered!"
-                                ]);
+                                    'message' => "Successfuly Registered!",
+                                ])->withCookie($cookie);
+                                
                             } else {
                                 return response([
                                     'source' => 'passwordMatch',

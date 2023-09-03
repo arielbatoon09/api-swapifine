@@ -21,7 +21,8 @@ return [
         'sanctum/csrf-cookie',
         '/login',
         'signup',
-        '/home'
+        '/home',
+        '/api/email/verification-notification',
     ],
 
     'allowed_methods' => ['*'],
