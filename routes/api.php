@@ -18,7 +18,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::post('/admin/login', [AdminAuthController::class, 'adminLogin']);
+Route::post('/admin/login', [AdminAuthController::class, 'login']);
+Route::post('/admin/invite', [AdminAuthController::class, 'invite']);
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/admin/logout', [AdminAuthController::class, 'logout']);

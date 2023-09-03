@@ -12,25 +12,61 @@ use Throwable;
 
 class AdminAuthController extends Controller
 {
+    public function invite(Request $request)
+    {
+        try {
+            if (!empty($request->fullname) && !empty($request->email)) {
+                if (filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+                    $getEmail = Admin::where('email', $request->email)->first();
+                    if (!$getEmail) {
+                        $randomPassword = Str::random(16);
+                        // To create temporary account
+                        Admin::create([
+                            'fullname' => $request->input('fullname'),
+                            'email' => $request->input('email'),
+                            'password' => Hash::make($randomPassword), // Hash the random password
+                            'is_superadmin' => $request->input('is_superadmin', 0),
+                        ]);
 
-    public function adminLogin(Request $request)
+                        return response([
+                            'status' => 'success',
+                            'message' => "Admin invite is now sent to the email.",
+                            'password' => $randomPassword,
+                        ]);
+                    } else {
+                        return response([
+                            'source' => 'emailExist',
+                            'status' => 'error',
+                            'message' => "This email address is already in use."
+                        ]);;
+                    }
+                } else {
+                    return response([
+                        'source' => 'emailNotValid',
+                        'status' => 'error',
+                        'message' => "Please enter a valid email address."
+                    ]);
+                }
+            } else {
+                return response([
+                    'source' => 'emptyField',
+                    'status' => 'error',
+                    'message' => "Please fill out this field."
+                ]);
+            }
+        } catch (Throwable $error) {
+            return response([
+                'status' => 'error',
+                'message' => 'ERROR: ' . $error,
+            ]);
+        }
+    }
+
+    public function login(Request $request)
     {
         try {
             if (!empty($request->email) && !empty($request->password)) {
-                
-                // $randomPassword = Str::random(16);
-                // // To create temporary account
-                // $admin = Admin::create([
-                //     'fullname' => $request->input('fullname'),
-                //     'email' => $request->input('email'),
-                //     'password' => Hash::make($randomPassword), // Hash the random password
-                //     'is_superadmin' => $request->input('is_superadmin', 0),
-                // ]);
 
-                // return response([
-                //     'password' => $randomPassword,
-                // ]);
-                
                 $admin = Admin::where('email', $request->email)->first();
 
                 if ($admin && Hash::check($request->password, $admin->password)) {
@@ -42,14 +78,12 @@ class AdminAuthController extends Controller
                         'status' => 'success',
                         'message' => 'Logged in successfully!',
                     ])->withCookie($cookie);;
-
                 } else {
                     return response([
                         'status' => 'error',
                         'message' => 'Invalid Credentials',
                     ]);
                 }
-                
             } else {
                 return response([
                     'source' => 'emptyField',
@@ -57,12 +91,11 @@ class AdminAuthController extends Controller
                     'message' => "Please fill out this field.",
                 ]);
             }
-
         } catch (Throwable $error) {
             return response([
                 'status' => 'error',
-                'message' => 'An error occurred while trying to log in.'.$error,
-            ], 500);
+                'message' => 'ERROR: ' . $error,
+            ]);
         }
     }
 
@@ -70,12 +103,11 @@ class AdminAuthController extends Controller
     {
         try {
             $cookie = Cookie::forget('jwt');
-            
+
             return response([
                 'status' => 'success',
                 'message' => 'Logout successfully!'
             ])->withCookie($cookie);
-
         } catch (Throwable $e) {
             return 'Error Catch: ' . $e->getMessage();
         }
