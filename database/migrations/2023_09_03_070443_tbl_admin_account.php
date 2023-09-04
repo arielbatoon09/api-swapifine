@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('is_superadmin');
             $table->string('profile_img')->nullable();
             $table->timestamps();
+            
         });
     }
 
