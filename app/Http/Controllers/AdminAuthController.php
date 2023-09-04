@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\addCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Controller;
@@ -12,6 +13,49 @@ use Throwable;
 
 class AdminAuthController extends Controller
 {
+    public function addCategory(Request $request)
+    {
+        try {
+            if(!empty($request->category)){
+                if(filter_var($request->category, FILTER_DEFAULT)){
+                    $getCategory = addCategory::where('category', $request->category)->first();
+                    if(!$getCategory){
+                        addCategory::create([
+                            'category' => $request->input('category'),
+                        ]);
+                        return response([
+                            'status' => 'success',
+                            'message' => "Category created.",
+                        ]);
+                    }else{
+                        return response([
+                            'source' => 'categoryExists',
+                            'status' => 'error',
+                            'message' => 'category already in use.',
+                        ]);
+                    }
+                }else{
+                    return response([
+                        'source' => 'category not valid',
+                        'status' => 'error',
+                        'message' => 'Enter valid category.',
+                    ]);
+                }
+            }else {
+                return response([
+                    'source' => 'Empty Category',
+                    'status' => 'error',
+                    'message' => 'Please fill out empty field.'
+                ]);
+            }
+        } catch (Throwable $error){
+            response([
+                'status' => 'error',
+                'message' => 'ERROR' . $error,
+            ]);
+        }
+    }
+    
     public function invite(Request $request)
     {
         try {
