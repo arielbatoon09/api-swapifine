@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Route;
+
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -20,7 +21,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::post('/admin/invite', [AdminAuthController::class, 'invite']);
-Route::post('/add/category', [AdminAuthController::class, 'addCategory']);
+Route::post('/add/category', [CategoryController::class, 'addCategory']);
+Route::get('/category/list', [CategoryController::class, 'CategoryList']);
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/admin/logout', [AdminAuthController::class, 'logout']);
