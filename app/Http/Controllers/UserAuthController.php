@@ -32,7 +32,6 @@ class UserAuthController extends Controller
                                     'fullname' => $request->input('fullname'),
                                     'email' => $request->input('email'),
                                     'password' => $request->input('password'),
-                                    'is_verified' => $request->input('is_verified', 0),
                                     'credits_amount' => $request->input('credits_amount', 0),
                                     'flag' => $request->input('flag', 0),
                                 ]);
