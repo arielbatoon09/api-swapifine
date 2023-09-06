@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\addCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Controller;
@@ -12,6 +13,7 @@ use Throwable;
 
 class AdminAuthController extends Controller
 {
+    
     public function invite(Request $request)
     {
         try {
