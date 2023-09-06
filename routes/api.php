@@ -13,11 +13,15 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
+| Welcome to Swapifine API Routes
+| Please always add the routes in the specific category.
+| Always follow clean code and structure.
+| - Ariel Batoon
 |
 */
+
+
+// ADMIN ROUTES
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::post('/admin/invite', [AdminAuthController::class, 'invite']);
 
@@ -25,6 +29,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/admin/logout', [AdminAuthController::class, 'logout']);
 });
 
+
+// USER ROUTES
 Route::post('/register', [UserAuthController::class, 'register']);
 Route::post('/login', [UserAuthController::class, 'login']);    
 
@@ -40,7 +46,6 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     return Redirect::to(env('SANCTUM_STATEFUL_DOMAINS'));
-    
 })->middleware(['auth:sanctum', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {
