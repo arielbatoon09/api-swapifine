@@ -4,10 +4,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\User\PostItemController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 
 
-// ADMIN ROUTES
+// Admin API Endpoints
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::post('/admin/invite', [AdminAuthController::class, 'invite']);
 Route::post('/add/category', [CategoryController::class, 'addCategory']);
@@ -33,15 +35,18 @@ Route::middleware('auth:sanctum')->group(function(){
 });
 
 
-// USER ROUTES
+// User API Endpoints
 Route::post('/register', [UserAuthController::class, 'register']);
 Route::post('/login', [UserAuthController::class, 'login']);    
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/user', [UserAuthController::class, 'user']);
     Route::get('/logout', [UserAuthController::class, 'logout']);
+    // Route::get('/post/item', [PostItemController::class, 'postItem']);
 });
+Route::post('/post/item', [PostItemController::class, 'postItem']);
 
+// Email Verification Routes
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth:sanctum')->name('verification.notice');

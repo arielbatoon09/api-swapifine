@@ -103,6 +103,7 @@ class UserAuthController extends Controller
                     return response([
                         'status' => 'success',
                         'message' => 'Logged in successfully!',
+                        'token' => $token,
                     ])->withCookie($cookie);
                 }
                 
@@ -115,10 +116,7 @@ class UserAuthController extends Controller
             }
 
         } catch (Throwable $e) {
-            return response([
-                'status' => 'error',
-                'message' => 'An error occurred while trying to log in.',
-            ], 500);
+            return 'Error Catch: ' . $e->getMessage();
         }
     }
 
