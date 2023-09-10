@@ -34,7 +34,7 @@ Route::group(['Category Management'], function () {
     Route::get('/category/list', [CategoryController::class, 'CategoryList']);
     Route::put('/category/update/{id}', [CategoryController::class, 'update']);
     Route::delete('/category/delete/{id}', [CategoryController::class, 'delete']);
-});
+}); 
 
 // USER MANAGEMENT
 Route::group(['User Management'], function () {
@@ -47,6 +47,8 @@ Route::group(['User Management'], function () {
 Route::group(['Admin Management'], function () {
     Route::post('/admin/invite', [AdminAuthController::class, 'invite']);
     Route::get('/admin/list', [AdminManagementController::class, 'AdminList']);
+    Route::put('/admin/update/{id}', [AdminManagementController::class, 'update']);
+    Route::delete('/admin/delete/{id}', [AdminManagementController::class, 'delete']);
 });
 
 

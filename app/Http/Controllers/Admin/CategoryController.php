@@ -8,35 +8,35 @@ use App\Models\Category;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
-{   
+{
     public function addCategory(Request $request)
     {
         try {
-            if(!empty($request->category)){
-                    $getCategory = Category::where('category', $request->category)->first();
-                    if(!$getCategory){
-                        Category::create([
-                            'category' => $request->input('category'),
-                        ]);
-                        return response([
-                            'status' => 'success',
-                            'message' => "Category created.",
-                        ]);
-                    }else{
-                        return response([
-                            'source' => 'categoryExists',
-                            'status' => 'error',
-                            'message' => 'category already in use.',
-                        ]);
-                    }
-                }else{
+            if (!empty($request->category_name)) {
+                $getCategory = Category::where('category_name', $request->category_name)->first();
+                if (!$getCategory) {
+                    Category::create([
+                        'category_name' => $request->input('category_name'),
+                    ]);
                     return response([
-                        'source' => 'category not valid',
+                        'status' => 'success',
+                        'message' => "Category created.",
+                    ]);
+                } else {
+                    return response([
+                        'source' => 'categoryExists',
                         'status' => 'error',
-                        'message' => 'Enter valid category.',
+                        'message' => 'category already in use.',
                     ]);
                 }
-        } catch (Throwable $error){
+            } else {
+                return response([
+                    'source' => 'category not valid',
+                    'status' => 'error',
+                    'message' => 'Enter valid category.',
+                ]);
+            }
+        } catch (Throwable $error) {
             response([
                 'status' => 'error',
                 'message' => 'ERROR' . $error,
@@ -54,7 +54,7 @@ class CategoryController extends Controller
                     'status' => 'error',
                     'message' => 'Unknown Category'
                 ]);
-            }else{
+            } else {
                 return $categories;
             }
         } catch (Throwable $error) {
@@ -65,16 +65,17 @@ class CategoryController extends Controller
         }
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
         try {
-            if(!empty($request->category)){
-                $updateCategory = Category::where('category',$request->category)->first();
-                if(!$updateCategory){
+            if (!empty($request->category)) {
+                $updateCategory = Category::where('category', $request->category)->first();
+                if (!$updateCategory) {
                     $resource = Category::findOrFail($id);
                     $resource->update([
-                                'category' => $request->input('category'),
-                            ]);
+                        'category' => $request->input('category'),
+                    ]);
                     return response([
                         'status' => 'success',
                         'message' => "Category updated.",
@@ -101,10 +102,11 @@ class CategoryController extends Controller
         }
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         try {
             $deleteCategory = Category::find($id)->delete();
-            
+
             if ($deleteCategory) {
                 // Category deleted successfully.
                 return response([
@@ -112,14 +114,13 @@ class CategoryController extends Controller
                     'message' => "Category deleted.",
                 ]);
             } else {
-                // Category could not be deleted (e.g., it's already in use).
                 return response([
-                        'source' => 'error',
-                        'status' => 'error',
-                        'message' => 'Category could not be deleted.',
+                    'source' => 'error',
+                    'status' => 'error',
+                    'message' => 'Category could not be deleted.',
                 ]);
             }
-        } catch (Throwable $error){
+        } catch (Throwable $error) {
             // Handle other errors.
             return response([
                 'source' => 'error',
