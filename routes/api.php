@@ -8,8 +8,9 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\User\PostItemController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\Admin\AdminManagementController;
 use App\Http\Controllers\Admin\CategoryController;
-
+use App\Http\Controllers\Admin\UserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,20 +27,39 @@ use App\Http\Controllers\Admin\CategoryController;
 
 // Admin API Endpoints
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
-Route::post('/admin/invite', [AdminAuthController::class, 'invite']);
-Route::post('/add/category', [CategoryController::class, 'addCategory']);
-Route::get('/category/list', [CategoryController::class, 'CategoryList']);
 
-Route::middleware('auth:sanctum')->group(function(){
+// CATEGORY MANAGEMENT
+Route::group(['Category Management'], function () {
+    Route::post('/add/category', [CategoryController::class, 'addCategory']);
+    Route::get('/category/list', [CategoryController::class, 'CategoryList']);
+    Route::put('/category/update/{id}', [CategoryController::class, 'update']);
+    Route::delete('/category/delete/{id}', [CategoryController::class, 'delete']);
+});
+
+// USER MANAGEMENT
+Route::group(['User Management'], function () {
+    Route::get('/user/list', [UserManagementController::class, 'userList']);
+    Route::put('/user/update/{id}', [UserManagementController::class, 'update']);
+    Route::delete('/user/delete/{id}', [UserManagementController::class, 'delete']);
+});
+
+// ADMIN MANAGEMENT
+Route::group(['Admin Management'], function () {
+    Route::post('/admin/invite', [AdminAuthController::class, 'invite']);
+    Route::get('/admin/list', [AdminManagementController::class, 'AdminList']);
+});
+
+
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/admin/logout', [AdminAuthController::class, 'logout']);
 });
 
 
 // User API Endpoints
 Route::post('/register', [UserAuthController::class, 'register']);
-Route::post('/login', [UserAuthController::class, 'login']);    
+Route::post('/login', [UserAuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function(){
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [UserAuthController::class, 'user']);
     Route::get('/logout', [UserAuthController::class, 'logout']);
     // Route::get('/post/item', [PostItemController::class, 'postItem']);

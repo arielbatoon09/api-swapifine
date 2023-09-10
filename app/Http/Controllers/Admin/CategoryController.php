@@ -64,4 +64,68 @@ class CategoryController extends Controller
             ]);
         }
     }
+
+    public function update(Request $request, $id){
+
+        try {
+            if(!empty($request->category)){
+                $updateCategory = Category::where('category',$request->category)->first();
+                if(!$updateCategory){
+                    $resource = Category::findOrFail($id);
+                    $resource->update([
+                                'category' => $request->input('category'),
+                            ]);
+                    return response([
+                        'status' => 'success',
+                        'message' => "Category updated.",
+                    ]);
+                } else {
+                    return response([
+                        'source' => 'categoryExists',
+                        'status' => 'error',
+                        'message' => 'category already in use.',
+                    ]);
+                }
+            } else {
+                return response([
+                    'source' => 'category not valid',
+                    'status' => 'error',
+                    'message' => 'Enter valid category.',
+                ]);
+            }
+        } catch (Throwable $error) {
+            response([
+                'resource' => 'error',
+                'message' => 'ERROR' . $error
+            ]);
+        }
+    }
+
+    public function delete($id){
+        try {
+            $deleteCategory = Category::find($id)->delete();
+            
+            if ($deleteCategory) {
+                // Category deleted successfully.
+                return response([
+                    'status' => 'success',
+                    'message' => "Category deleted.",
+                ]);
+            } else {
+                // Category could not be deleted (e.g., it's already in use).
+                return response([
+                        'source' => 'error',
+                        'status' => 'error',
+                        'message' => 'Category could not be deleted.',
+                ]);
+            }
+        } catch (Throwable $error){
+            // Handle other errors.
+            return response([
+                'source' => 'error',
+                'status' => 'error',
+                'message' => 'ERROR: ' . $error->getMessage(),
+            ]);
+        }
+    }
 }
