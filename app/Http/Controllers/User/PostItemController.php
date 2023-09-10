@@ -23,7 +23,7 @@ class PostItemController extends Controller
             // Check if the data is not empty
             if(!empty($request->category_id) && !empty($request->location_id) && !empty($request->item_name) && !empty($request->item_description)
             && !empty($request->item_price) && !empty($request->item_quantity) && !empty($request->condition) && !empty($request->item_for_type) 
-            && !empty($request->delivery_type)) {
+            && !empty($request->delivery_type) && !empty($request->payment_type)) {
                 // Validate the integer data
                 if(filter_var($request->category_id, FILTER_VALIDATE_INT) !== false && filter_var($request->location_id, FILTER_VALIDATE_INT) !== false
                 && filter_var($request->item_price, FILTER_VALIDATE_FLOAT) !== false && filter_var($request->item_quantity, FILTER_VALIDATE_INT) !== false) {
@@ -37,7 +37,7 @@ class PostItemController extends Controller
 
                     $post->create([
                         'item_key' => $this->secretKey,
-                        'user_id' => $userID,
+                        'user_id' => $userID->id,
                         'category_id' => $request->input('category_id'),
                         'location_id' => $request->input('location_id'),
                         'item_name' => $request->input('item_name'),
@@ -47,6 +47,7 @@ class PostItemController extends Controller
                         'condition' => $request->input('condition'),
                         'item_for_type' => $request->input('item_for_type'),
                         'delivery_type' => $request->input('delivery_type'),
+                        'payment_type' => $request->input('payment_type'),
                     ]);
                     
                     // Insert to Image Table

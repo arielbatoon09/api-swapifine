@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('condition');
             $table->string('item_for_type');
             $table->string('delivery_type');
+            $table->string('payment_type');
             $table->integer('count_favorites')->default(0);
             $table->integer('is_available')->default(1);
             $table->timestamps();

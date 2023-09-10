@@ -23,6 +23,7 @@ return [
         'signup',
         '/home',
         '/api/email/verification-notification',
+        '/post/item',
     ],
 
     'allowed_methods' => ['*'],

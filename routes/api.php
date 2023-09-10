@@ -62,9 +62,8 @@ Route::post('/login', [UserAuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [UserAuthController::class, 'user']);
     Route::get('/logout', [UserAuthController::class, 'logout']);
-    // Route::get('/post/item', [PostItemController::class, 'postItem']);
+    Route::post('/post/item', [PostItemController::class, 'postItem']);
 });
-Route::post('/post/item', [PostItemController::class, 'postItem']);
 
 // Email Verification Routes
 Route::get('/email/verify', function () {

@@ -24,6 +24,7 @@ class PostItem extends Model
         'condition',
         'item_for_type',
         'delivery_type',
+        'payment_type',
     ];
 
     public function images()
