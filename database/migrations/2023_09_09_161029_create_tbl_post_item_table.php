@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tbl_post_item', function (Blueprint $table) {
             $table->id();
-            $table->string('item_key')->unique();
+            $table->string('item_key');
             $table->integer('user_id');
             $table->integer('category_id');
             $table->integer('location_id');

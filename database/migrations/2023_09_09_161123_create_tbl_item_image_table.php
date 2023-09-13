@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tbl_item_image', function (Blueprint $table) {
             $table->id();
-            $table->string('post_item_key')->unique();
+            $table->string('post_item_key');
             $table->string('img_file_path');
             $table->timestamps();
         });
