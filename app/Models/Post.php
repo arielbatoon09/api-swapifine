@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\User;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User\PostImage;
+use App\Models\Image;
 
-class PostItem extends Model
+class Post extends Model
 {
     use HasFactory;
 
@@ -29,6 +29,6 @@ class PostItem extends Model
 
     public function images()
     {
-        return $this->hasMany(PostImage::class);
+        return $this->hasMany(Image::class);
     }
 }

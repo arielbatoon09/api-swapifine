@@ -8,7 +8,7 @@
 </p>
 
 ## Things to perform
-1. Composer update
+1. Composer install -- Newly setup
 2. php artisan db:seed --class=CategorySeeder - To migrate all the given Categories
 3. Make sure to enable this extension in php.ini -> extension=gd
 
