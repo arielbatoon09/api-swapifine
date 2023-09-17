@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserAuthController;
-use App\Http\Controllers\User\PostItemController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\AdminManagementController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -64,7 +64,9 @@ Route::post('/login', [UserAuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [UserAuthController::class, 'user']);
     Route::get('/logout', [UserAuthController::class, 'logout']);
-    Route::post('/post/item', [PostItemController::class, 'postItem']);
+
+    Route::post('/post/item', [PostController::class, 'PostItem']);
+    Route::get('/browse', [PostController::class, 'GetAllPostItem']);
 });
 
 // Email Verification Routes
