@@ -30,13 +30,14 @@ class UserManagementController extends Controller
         }
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request){
         try {
             if(!empty($request->email)){
                 $updateUser = User::where('email', $request->email)->first();
                 if(!$updateUser){
-                    $resource = User::findorFail($id);
+                    $resource = User::findorFail($request->input('id'));
                     $resource->update([
+                        'fullname' => $request->input('fullname'),
                         'email' => $request->input('email'),
                     ]);
                     return response([

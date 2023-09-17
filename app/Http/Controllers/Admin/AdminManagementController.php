@@ -30,13 +30,14 @@ class AdminManagementController extends Controller
         }
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request){
         try {
             if(!empty($request->email)){
                 $updateAdmin = Admin::where('email', $request->email)->first();
                 if(!$updateAdmin){
-                    $resource = Admin::findOrFail($id);
+                    $resource = Admin::findOrFail($request->input('id'));
                     $resource->update([
+                        'fullname' => $request->input('fullname'),
                         'email' => $request->input('email'),
                     ]);
                     return response([

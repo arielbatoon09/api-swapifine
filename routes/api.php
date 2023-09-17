@@ -4,13 +4,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserAuthController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\Admin\AdminManagementController;
+use App\Http\Controllers\User\PostItemController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\User\PersonalInfoController;
 use App\Http\Controllers\Admin\UserManagementController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\Admin\AdminManagementController;
+use App\Http\Controllers\Admin\SuperAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,23 +34,33 @@ Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::group(['Category Management'], function () {
     Route::post('/add/category', [CategoryController::class, 'addCategory']);
     Route::get('/category/list', [CategoryController::class, 'CategoryList']);
-    Route::put('/category/update/{id}', [CategoryController::class, 'update']);
-    Route::delete('/category/delete/{id}', [CategoryController::class, 'delete']);
+    Route::post('/category/update', [CategoryController::class, 'update']);
+    Route::post('/category/delete/{id}', [CategoryController::class, 'delete']);
 }); 
 
 // USER MANAGEMENT
 Route::group(['User Management'], function () {
     Route::get('/user/list', [UserManagementController::class, 'userList']);
-    Route::put('/user/update/{id}', [UserManagementController::class, 'update']);
-    Route::delete('/user/delete/{id}', [UserManagementController::class, 'delete']);
+    Route::post('/user/update', [UserManagementController::class, 'update']);
+    Route::post('/user/delete/{id}', [UserManagementController::class, 'delete']);
 });
 
 // ADMIN MANAGEMENT
 Route::group(['Admin Management'], function () {
     Route::post('/admin/invite', [AdminAuthController::class, 'invite']);
     Route::get('/admin/list', [AdminManagementController::class, 'AdminList']);
-    Route::put('/admin/update/{id}', [AdminManagementController::class, 'update']);
-    Route::delete('/admin/delete/{id}', [AdminManagementController::class, 'delete']);
+    Route::post('/admin/update', [AdminManagementController::class, 'update']);
+    Route::post('/admin/delete/{id}', [AdminManagementController::class, 'delete']);
+});
+
+Route::group(['Verification Request'], function(){
+    Route::post('/add/verification', [PersonalInfoController::class, 'addVerification']);
+    Route::get('/userVerification/list', [PersonalInfoController::class, 'verificationList']);
+});
+
+Route::group(['Super Admin'], function(){
+    Route::post('/SuperAdmin/EmailUpdate', [SuperAdminController::class, 'EmailUpdate']);
+    Route::post('/SuperAdmin/UpdatePassword', [SuperAdminController::class, 'PasswordUpdate']);
 });
 
 
