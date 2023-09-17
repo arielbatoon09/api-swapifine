@@ -10,7 +10,7 @@ use Intervention\Image\ImageManagerStatic;
 use App\Models\Post;
 use App\Models\Image;
 
-class PostItemService
+class PostItem
 {
     private static $getUserID;
     private static $postItem;
@@ -35,15 +35,15 @@ class PostItemService
     {
         try {
             // Function Init
-            PostItemService::initialize();
-            PostItemService::PostItemValidation($request);
+            PostItem::initialize();
+            PostItem::PostItemValidation($request);
 
             if (!self::$isEmpty) {
                 if (!self::$invalidInput) {
                     if (strlen($request->item_name) <= 60) {
                         if (strlen($request->item_description) <= 300) {
                             // Call and save the Item data into StorePostItem function
-                            $response = PostItemService::StorePostItem($request);
+                            $response = PostItem::StorePostItem($request);
 
                             // Upload Image
                             $imageDataArray = $request->input('img_file_path');

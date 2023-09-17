@@ -4,7 +4,6 @@ namespace App\Http\Services\PostItem;
 
 use Throwable;
 use App\Models\Post;
-// use App\Models\Image;
 
 class GetAllPostItem
 {
@@ -17,9 +16,11 @@ class GetAllPostItem
             foreach ($postsWithImages as $post) {
             
                 $postData[] = [
+                    'id' => $post->id,
                     'item_name' => $post->item_name,
                     'fullname' => $post->user->fullname,
                     'images' => $post->images,
+                    'category_name' => $post->category->category_name,
                 ];
             }
 
