@@ -10,7 +10,10 @@ class GetAllPostItem
     public static function GetAllPostItem()
     {
         try {
-            $postsWithImages = Post::with('images')->get();
+            $postsWithImages = Post::with('images')
+                ->where('is_available', 1)
+                ->get();
+
             $postData = [];
             
             foreach ($postsWithImages as $post) {

@@ -21,12 +21,12 @@ class Post extends Model
         'location_id',
         'item_name',
         'item_description',
-        'item_price',
-        'item_quantity',
+        'item_stocks',
         'condition',
         'item_for_type',
-        'delivery_type',
-        'payment_type',
+        'item_cash_value',
+        'count_favorites',
+        'is_available',
     ];
 
     public function user()

@@ -22,19 +22,24 @@ class GetPostDetails
                     'category_name' => $postWithImages->category->category_name,
                     'item_name' => $postWithImages->item_name,
                     'item_description' => $postWithImages->item_description,
-                    'item_price' => $postWithImages->item_price,
-                    'item_quantity' => $postWithImages->item_quantity,
+                    'item_for_type' => $postWithImages->item_for_type,
+                    'item_cash_value' => $postWithImages->item_cash_value,
+                    'item_stocks' => $postWithImages->item_stocks,
                     'condition' => $postWithImages->condition,
-                    'item_for_type' => $postWithImages->delivery_type,
-                    'payment_type' => $postWithImages->payment_type,
                     'is_available' => $postWithImages->is_available,
                     'images' => $postWithImages->images,
                 ];
 
-                return $postData;
+                return response([
+                    'status' => 'success',
+                    'data' => $postData,
+                ]);
+
             } else {
-                // Handle the case where the post with the given ID is not found
-                return $postData = [];
+                return response([
+                    'status' => 'error',
+                    'message' => 'Data not found!',
+                ]);
             }
 
 

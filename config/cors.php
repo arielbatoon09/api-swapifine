@@ -25,6 +25,7 @@ return [
         '/api/email/verification-notification',
         '/post/item',
         '/browse',
+        '/view/item',
     ],
 
     'allowed_methods' => ['*'],
