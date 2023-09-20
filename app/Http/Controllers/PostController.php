@@ -3,25 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\PostItem\PostItem;
-use App\Http\Services\PostItem\GetAllPostItem;
-use App\Http\Services\PostItem\GetPostDetails;
+use App\Http\Services\PostItem\PostItemService;
+use App\Http\Services\PostItem\GetAllPostItemService;
+use App\Http\Services\PostItem\GetPostDetailsService;
+use App\Http\Services\PostItem\GetTop3PostCategoryService;
 
 class PostController extends Controller
 {
     
     public function PostItem(Request $request)
     {
-        return PostItem::PostItem($request);
+        return PostItemService::PostItem($request);
         
     }
     public function GetAllPostItem()
     {
-        return GetAllPostItem::GetAllPostItem();
+        return GetAllPostItemService::GetAllPostItem();
+    }
+    public function GetTop3PostCategory()
+    {
+        return GetTop3PostCategoryService::GetTop3PostCategory();
+
     }
     public function GetPostDetails(Request $request)
     {
-        return GetPostDetails::GetPostDetails($request);
+        return GetPostDetailsService::GetPostDetails($request);
     }
 
 }

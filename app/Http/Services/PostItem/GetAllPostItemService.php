@@ -5,7 +5,7 @@ namespace App\Http\Services\PostItem;
 use Throwable;
 use App\Models\Post;
 
-class GetAllPostItem
+class GetAllPostItemService
 {
     public static function GetAllPostItem()
     {

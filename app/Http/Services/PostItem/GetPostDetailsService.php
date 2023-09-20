@@ -6,7 +6,7 @@ use Throwable;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
-class GetPostDetails
+class GetPostDetailsService
 {
     public static function GetPostDetails(Request $request)
     {
