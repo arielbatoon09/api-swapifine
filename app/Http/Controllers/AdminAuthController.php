@@ -78,7 +78,7 @@ class AdminAuthController extends Controller
                     return response([
                         'status' => 'success',
                         'message' => 'Logged in successfully!',
-                    ])->withCookie($cookie);;
+                    ])->withCookie($cookie);
                 } else {
                     return response([
                         'status' => 'error',
