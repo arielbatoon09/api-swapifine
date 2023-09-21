@@ -69,17 +69,23 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 
-// User API Endpoints
+// Guest API Endpoints
 Route::post('/register', [UserAuthController::class, 'register']);
 Route::post('/login', [UserAuthController::class, 'login']);
 
+// Protected API Endpoints
 Route::middleware('auth:sanctum')->group(function () {
+    // Common Endpoints
     Route::get('/user', [UserAuthController::class, 'user']);
     Route::get('/logout', [UserAuthController::class, 'logout']);
 
+    // Post Endpoints
     Route::post('/post/item', [PostController::class, 'PostItem']);
+    Route::post('/view/item', [PostController::class, 'GetPostDetails']);
     Route::get('/browse', [PostController::class, 'GetAllPostItem']);
+    Route::get('/view/top-post', [PostController::class, 'GetTop3PostCategory']);
 });
+
 
 // Email Verification Routes
 Route::get('/email/verify', function () {

@@ -130,12 +130,10 @@ class PostItemService
                 'location_id' => $request->input('location_id'),
                 'item_name' => $request->input('item_name'),
                 'item_description' => $request->input('item_description'),
-                'item_price' => $request->input('item_price'),
-                'item_quantity' => $request->input('item_quantity'),
+                'item_stocks' => $request->input('item_stocks'),
                 'condition' => $request->input('condition'),
                 'item_for_type' => $request->input('item_for_type'),
-                'delivery_type' => $request->input('delivery_type'),
-                'payment_type' => $request->input('payment_type'),
+                'item_cash_value' => $request->input('item_cash_value'),
             ]);
 
             return true;
@@ -150,13 +148,13 @@ class PostItemService
             // isEmpty Validation
             if (
                 !empty($request->category_id) && !empty($request->location_id) && !empty($request->item_name) && !empty($request->item_description)
-                && !empty($request->item_price) && !empty($request->item_quantity) && !empty($request->condition) && !empty($request->item_for_type)
-                && !empty($request->delivery_type) && !empty($request->payment_type) && !empty($request->img_file_path)
+                && !empty($request->item_cash_value) && !empty($request->item_stocks) && !empty($request->condition) && !empty($request->item_for_type)
+                && !empty($request->img_file_path)
             ) {
                 // Number Validation
                 if (
                     filter_var($request->category_id, FILTER_VALIDATE_INT) !== false && filter_var($request->location_id, FILTER_VALIDATE_INT) !== false
-                    && filter_var($request->item_price, FILTER_VALIDATE_FLOAT) !== false && filter_var($request->item_quantity, FILTER_VALIDATE_INT) !== false
+                    && filter_var($request->item_cash_value, FILTER_VALIDATE_FLOAT) !== false && filter_var($request->item_stocks, FILTER_VALIDATE_INT) !== false
                 ) {
                     self::$invalidInput = false;
                 } else {

@@ -19,12 +19,10 @@ return new class extends Migration
             $table->integer('location_id');
             $table->string('item_name');
             $table->string('item_description');
-            $table->decimal('item_price');
-            $table->integer('item_quantity');
+            $table->integer('item_stocks');
             $table->string('condition');
             $table->string('item_for_type');
-            $table->string('delivery_type');
-            $table->string('payment_type');
+            $table->decimal('item_cash_value');
             $table->integer('count_favorites')->default(0);
             $table->integer('is_available')->default(1);
             $table->timestamps();
