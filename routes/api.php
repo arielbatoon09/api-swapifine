@@ -71,9 +71,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/post/item', [PostController::class, 'PostItem']);
     Route::post('/view/item', [PostController::class, 'GetPostDetails']);
     Route::get('/browse', [PostController::class, 'GetAllPostItem']);
-    Route::get('/view/top-post', [PostController::class, 'GetTop3PostCategory']);
+    Route::get('/browse/top-post', [PostController::class, 'GetTop3PostCategory']);
+    Route::post('/browse/recent-post', [PostController::class, 'GetRecentViewedPost']);
 });
-
 
 // Email Verification Routes
 Route::get('/email/verify', function () {

@@ -42,7 +42,6 @@ class GetPostDetailsService
                 ]);
             }
 
-
         } catch (Throwable $e) {
             return 'Error Catch: ' . $e->getMessage(); 
         }
