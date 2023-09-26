@@ -34,7 +34,7 @@ class GetPostDetailsService
                     'status' => 'success',
                     'data' => $postData,
                 ]);
-
+                
             } else {
                 return response([
                     'status' => 'error',

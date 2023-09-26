@@ -11,15 +11,14 @@ use App\Http\Services\PostItem\GetRecentViewedPostService;
 
 class PostController extends Controller
 {
-    
+    public function GetAllPostItem()
+    {
+        return GetAllPostItemService::GetAllPostItem();
+    }
     public function PostItem(Request $request)
     {
         return PostItemService::PostItem($request);
         
-    }
-    public function GetAllPostItem()
-    {
-        return GetAllPostItemService::GetAllPostItem();
     }
     public function GetTop3PostCategory()
     {

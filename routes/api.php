@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
+
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\AdminManagementController;
-use App\Http\Controllers\Admin\CategoryController;
+// use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserManagementController;
 
 /*
@@ -30,11 +32,11 @@ Route::post('/admin/login', [AdminAuthController::class, 'login']);
 
 // CATEGORY MANAGEMENT
 Route::group(['Category Management'], function () {
-    Route::post('/add/category', [CategoryController::class, 'addCategory']);
-    Route::get('/category/list', [CategoryController::class, 'CategoryList']);
-    Route::put('/category/update/{id}', [CategoryController::class, 'update']);
-    Route::delete('/category/delete/{id}', [CategoryController::class, 'delete']);
-}); 
+    Route::get('/admin/category/list', [CategoryController::class, 'GetAllCategory']);
+    Route::post('/admin/category/post', [CategoryController::class, 'PostCategory']);
+    Route::post('/admin/category/update', [CategoryController::class, 'UpdateCategory']);
+    Route::post('admin/category/delete', [CategoryController::class, 'DeleteCategory']);
+});
 
 // USER MANAGEMENT
 Route::group(['User Management'], function () {
@@ -68,11 +70,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/logout', [UserAuthController::class, 'logout']);
 
     // Post Endpoints
-    Route::post('/post/item', [PostController::class, 'PostItem']);
-    Route::post('/view/item', [PostController::class, 'GetPostDetails']);
     Route::get('/browse', [PostController::class, 'GetAllPostItem']);
     Route::get('/browse/top-post', [PostController::class, 'GetTop3PostCategory']);
+    Route::post('/post/item', [PostController::class, 'PostItem']);
+    Route::post('/view/item', [PostController::class, 'GetPostDetails']);
     Route::post('/browse/recent-post', [PostController::class, 'GetRecentViewedPost']);
+
+    // Category Endpoints
+    Route::get('/category/list', [CategoryController::class, 'GetAllCategory']);
+
 });
 
 // Email Verification Routes
