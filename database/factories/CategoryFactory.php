@@ -33,6 +33,7 @@ class CategoryFactory extends Factory
              'Entertainment',
              'Family',
              'Services',
+             'Others',
          ];
      
          return [
