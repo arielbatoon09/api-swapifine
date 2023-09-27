@@ -3,15 +3,16 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use Illuminate\Support\Facades\Redirect;
-use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserAuthController;
 
 use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\Admin\AdminManagementController;
-// use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserManagementController;
+// use App\Http\Controllers\Admin\CategoryController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\Admin\AdminManagementController;
 
 /*
 |--------------------------------------------------------------------------
