@@ -34,14 +34,13 @@ class GetPostDetailsService
                     'status' => 'success',
                     'data' => $postData,
                 ]);
-
+                
             } else {
                 return response([
                     'status' => 'error',
                     'message' => 'Data not found!',
                 ]);
             }
-
 
         } catch (Throwable $e) {
             return 'Error Catch: ' . $e->getMessage(); 

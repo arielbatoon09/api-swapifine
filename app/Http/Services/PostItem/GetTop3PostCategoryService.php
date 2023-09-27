@@ -42,13 +42,17 @@ class GetTop3PostCategoryService
                         'posts' => [],
                     ];
                 }
-                $groupedData[$category_id]['posts'][] = [
-                    'id' => $post->id,
-                    'item_name' => $post->item_name,
-                    'fullname' => $post->user->fullname,
-                    'images' => $post->images,
-                    'category_name' => $post->category->category_name,
-                ];
+
+                // Limit the number of posts per category to less than 5
+                if (count($groupedData[$category_id]['posts']) < 5) {
+                    $groupedData[$category_id]['posts'][] = [
+                        'id' => $post->id,
+                        'item_name' => $post->item_name,
+                        'fullname' => $post->user->fullname,
+                        'images' => $post->images,
+                        'category_name' => $post->category->category_name,
+                    ];
+                }
             }
 
             // Sort the grouped data by the number of posts in descending order
