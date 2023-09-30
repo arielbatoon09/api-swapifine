@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LocationController;
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\AdminManagementController;
@@ -65,20 +66,24 @@ Route::post('/login', [UserAuthController::class, 'login']);
 
 // Protected API Endpoints
 Route::middleware('auth:sanctum')->group(function () {
-    // Common Endpoints
+    // Common Endpoint
     Route::get('/user', [UserAuthController::class, 'user']);
     Route::get('/logout', [UserAuthController::class, 'logout']);
 
-    // Post Endpoints
+    // Post Endpoint
     Route::get('/browse', [PostController::class, 'GetAllPostItem']);
     Route::get('/browse/top-post', [PostController::class, 'GetTop3PostCategory']);
     Route::post('/post/item', [PostController::class, 'PostItem']);
     Route::post('/view/item', [PostController::class, 'GetPostDetails']);
     Route::post('/browse/recent-post', [PostController::class, 'GetRecentViewedPost']);
 
-    // Category Endpoints
+    // Category Endpoint
     Route::get('/category/list', [CategoryController::class, 'GetAllCategory']);
 
+    // Location Endpoint
+    Route::get('/geocoding/{location}', [LocationController::class, 'GetSearchLocation']);
+    Route::get('/location/list', [LocationController::class, 'GetUserLocation']);
+    Route::post('/post/location', [LocationController::class, 'PostLocation']);
 });
 
 // Email Verification Routes

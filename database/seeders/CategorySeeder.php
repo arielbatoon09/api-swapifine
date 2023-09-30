@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
 
@@ -26,6 +25,7 @@ class CategorySeeder extends Seeder
             'Entertainment',
             'Family',
             'Services',
+            'Others',
         ];
 
         Category::factory(count($categories))->create();

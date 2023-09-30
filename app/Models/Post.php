@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Location;
 
 class Post extends Model
 {
@@ -40,5 +41,9 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'location_id', 'id');
     }
 }
