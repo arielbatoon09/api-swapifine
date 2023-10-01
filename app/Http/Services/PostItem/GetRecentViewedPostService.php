@@ -33,7 +33,6 @@ class GetRecentViewedPostService
                             'fullname' => $post->user->fullname,
                             'images' => $post->images,
                             'category_name' => $post->category->category_name,
-                            'category_name' => $post->category->category_name,
                             'post_address' => $post->location->address,
                             'post_latitude' => $post->location->latitude,
                             'post_longitude' => $post->location->longitude,
