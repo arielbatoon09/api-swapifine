@@ -26,6 +26,7 @@ class GetAllPostItemService
                 'post_address' => $post->location->address,
                 'post_latitude' => $post->location->latitude,
                 'post_longitude' => $post->location->longitude,
+                'created_at' => $post->created_at->format('Y-m-d H:i:s'),
             ];
         }
 
