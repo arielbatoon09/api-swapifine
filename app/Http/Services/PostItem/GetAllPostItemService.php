@@ -23,6 +23,8 @@ class GetAllPostItemService
                 'fullname' => $post->user->fullname,
                 'images' => $post->images,
                 'category_name' => $post->category->category_name,
+                'condition' => $post->condition,
+                'item_for_type' => $post->item_for_type,
                 'post_address' => $post->location->address,
                 'post_latitude' => $post->location->latitude,
                 'post_longitude' => $post->location->longitude,
