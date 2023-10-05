@@ -11,13 +11,13 @@ class UpdateCategoryService
     public static function UpdateCategory(Request $request)
     {
         try {
-            if (!empty($request->category)) {
-                $updateCategory = Category::where('category', $request->id)->first();
+            if (!empty($request->category_name)) {
+                $updateCategory = Category::where('category_name', $request->id)->first();
 
                 if (!$updateCategory) {
                     $resource = Category::findOrFail($request->id);
                     $resource->update([
-                        'category' => $request->input('category'),
+                        'category_name' => $request->input('category_name'),
                     ]);
                     return response([
                         'status' => 'success',

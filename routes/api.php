@@ -35,7 +35,7 @@ Route::group(['Category Management'], function () {
     Route::get('/admin/category/list', [CategoryController::class, 'GetAllCategory']);
     Route::post('/admin/category/post', [CategoryController::class, 'PostCategory']);
     Route::post('/admin/category/update', [CategoryController::class, 'UpdateCategory']);
-    Route::post('admin/category/delete', [CategoryController::class, 'DeleteCategory']);
+    Route::post('/admin/category/delete/{id}', [CategoryController::class, 'DeleteCategory']);
 });
 
 // USER MANAGEMENT

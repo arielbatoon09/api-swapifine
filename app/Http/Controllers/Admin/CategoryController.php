@@ -101,10 +101,10 @@ class CategoryController extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
         try {
-            $deleteCategory = Category::find($id)->delete();
+            $deleteCategory = Category::find($request->id)->delete();
 
             if ($deleteCategory) {
                 // Category deleted successfully.
