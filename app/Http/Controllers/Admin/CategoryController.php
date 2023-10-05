@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use Throwable;
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Services\Category\UpdateCategoryService;
 
 class CategoryController extends Controller
 {
-    public function addCategory(Request $request)
+    public function PostCategory(Request $request)
     {
         try {
             if (!empty($request->category_name)) {
@@ -44,7 +45,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function CategoryList()
+    public function GetAllCategory()
     {
         try {
             $categories = Category::all();
@@ -65,40 +66,9 @@ class CategoryController extends Controller
         }
     }
 
-    public function update(Request $request)
-    {   
-        try {
-            if (!empty($request->category_name)) {
-                $updateCategory = Category::where('category_name', $request->category_name)->first();
-                if (!$updateCategory) {
-                    $resource = Category::findOrFail($request->input('id'));
-                    $resource->update([
-                        'category_name' => $request->input('category_name'),
-                    ]);
-                    return response([
-                        'status' => 'success',
-                        'message' => "Category updated.",
-                    ]);
-                } else {
-                    return response([
-                        'source' => 'categoryExists',
-                        'status' => 'error',
-                        'message' => 'category already in use.',
-                    ]);
-                }
-            } else {
-                return response([
-                    'source' => 'category not valid',
-                    'status' => 'error',
-                    'message' => 'Enter valid category.',
-                ]);
-            }
-        } catch (Throwable $error) {
-            response([
-                'resource' => 'error',
-                'message' => 'ERROR' . $error
-            ]);
-        }
+    public function UpdateCategory(Request $request)
+    {
+        return UpdateCategoryService::UpdateCategory($request);
     }
 
     public function delete(Request $request)

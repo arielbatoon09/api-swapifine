@@ -10,7 +10,6 @@ use App\Http\Controllers\LocationController;
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\UserManagementController;
-// use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Admin\AdminManagementController;
 
