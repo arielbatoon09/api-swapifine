@@ -28,6 +28,7 @@ class GetPostDetailsService
                     'condition' => $postWithImages->condition,
                     'is_available' => $postWithImages->is_available,
                     'images' => $postWithImages->images,
+                    'post_address' => $postWithImages->location->address,
                 ];
 
                 return response([

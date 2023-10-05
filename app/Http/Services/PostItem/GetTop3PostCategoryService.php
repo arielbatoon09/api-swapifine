@@ -27,7 +27,7 @@ class GetTop3PostCategoryService
             }
 
             // Retrieve posts that belong to the top 3 category IDs using Eloquent
-            $postsWithImages = Post::with(['images', 'user', 'category'])
+            $postsWithImages = Post::with(['images', 'user', 'category','location'])
                 ->where('is_available', 1)
                 ->whereIn('category_id', $topCategoryIds)
                 ->get();
@@ -51,6 +51,9 @@ class GetTop3PostCategoryService
                         'fullname' => $post->user->fullname,
                         'images' => $post->images,
                         'category_name' => $post->category->category_name,
+                        'post_address' => $post->location->address,
+                        'post_latitude' => $post->location->latitude,
+                        'post_longitude' => $post->location->longitude,
                     ];
                 }
             }

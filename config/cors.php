@@ -26,6 +26,7 @@ return [
         '/post/item',
         '/browse',
         '/view/item',
+        '/location/list',
     ],
 
     'allowed_methods' => ['*'],
