@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Throwable;
-use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
-use App\Http\Services\Category\UpdateCategoryService;
 
 class CategoryController extends Controller
 {
-    public function PostCategory(Request $request)
+    public function addCategory(Request $request)
     {
         try {
             if (!empty($request->category_name)) {
@@ -45,7 +44,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function GetAllCategory()
+    public function CategoryList()
     {
         try {
             $categories = Category::all();
@@ -66,15 +65,46 @@ class CategoryController extends Controller
         }
     }
 
-    public function UpdateCategory(Request $request)
-    {
-        return UpdateCategoryService::UpdateCategory($request);
+    public function update(Request $request)
+    {   
+        try {
+            if (!empty($request->category_name)) {
+                $updateCategory = Category::where('category_name', $request->category_name)->first();
+                if (!$updateCategory) {
+                    $resource = Category::findOrFail($request->input('id'));
+                    $resource->update([
+                        'category_name' => $request->input('category_name'),
+                    ]);
+                    return response([
+                        'status' => 'success',
+                        'message' => "Category updated.",
+                    ]);
+                } else {
+                    return response([
+                        'source' => 'categoryExists',
+                        'status' => 'error',
+                        'message' => 'category already in use.',
+                    ]);
+                }
+            } else {
+                return response([
+                    'source' => 'category not valid',
+                    'status' => 'error',
+                    'message' => 'Enter valid category.',
+                ]);
+            }
+        } catch (Throwable $error) {
+            response([
+                'resource' => 'error',
+                'message' => 'ERROR' . $error
+            ]);
+        }
     }
 
     public function delete(Request $request)
     {
         try {
-            $deleteCategory = Category::find($request->id)->delete();
+            $deleteCategory = Category::find($request)->delete();
 
             if ($deleteCategory) {
                 // Category deleted successfully.
