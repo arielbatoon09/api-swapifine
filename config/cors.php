@@ -27,6 +27,9 @@ return [
         '/browse',
         '/view/item',
         '/location/list',
+        '/inbox/inquire',
+        '/inbox/list',
+        '/inbox/update/is-read',
     ],
 
     'allowed_methods' => ['*'],

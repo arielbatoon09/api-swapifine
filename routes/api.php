@@ -9,10 +9,10 @@ use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\InboxController;
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\AdminManagementController;
-// use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserManagementController;
 
 /*
@@ -84,6 +84,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/geocoding/{location}', [LocationController::class, 'GetSearchLocation']);
     Route::get('/location/list', [LocationController::class, 'GetUserLocation']);
     Route::post('/post/location', [LocationController::class, 'PostLocation']);
+
+    // Inbox Endpoint
+    Route::get('/inbox/list', [InboxController::class, 'GetAllContacts']);
+    Route::post('/inbox/inquire', [InboxController::class, 'TapToInquire']);
+    Route::post('/inbox/update/is-read', [InboxController::class, 'UpdateIsReadStatus']);
 });
 
 // Email Verification Routes
