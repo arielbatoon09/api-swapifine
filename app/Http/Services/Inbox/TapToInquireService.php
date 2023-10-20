@@ -57,9 +57,11 @@ class TapToInquireService
                         // Store to Inbox
                         self::$inboxModel->create([
                             'inbox_key' => self::$secretKey,
-                            'user_id' => self::$getUserID,
+                            'from_id' => self::$getUserID,
+                            'to_id' => $request->post_user_id,
                             'post_item_key' => $postItemKey,
-                            'is_read' => 0,
+                            'read_by_sender' => 0,
+                            'read_by_receiver' => 0,
                         ]);
 
                         // Open a conversation/message

@@ -29,7 +29,7 @@ class Authenticate extends Middleware
             } else {
                 return response([
                     'status' => 'error',
-                    'message' => "Can't find account token!",
+                    'message' => "Can't find account tokens!",
                 ]);
             }
             $this->authenticate($request, $guards);

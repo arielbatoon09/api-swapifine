@@ -30,6 +30,9 @@ return [
         '/inbox/inquire',
         '/inbox/list',
         '/inbox/update/is-read',
+        '/inbox/messages',
+        '/inbox/send-message',
+        '/broadcasting/auth',
     ],
 
     'allowed_methods' => ['*'],

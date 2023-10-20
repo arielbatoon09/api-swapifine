@@ -17,13 +17,19 @@ class Inbox extends Model
 
     protected $fillable = [
         'inbox_key',
-        'user_id',
+        'from_id',
+        'to_id',
         'post_item_key',
-        'is_read',
+        'read_by_sender',
+        'read_by_receiver',
     ];
-    public function user()
+    public function from_user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'from_id', 'id');
+    }
+    public function to_user()
+    {
+        return $this->belongsTo(User::class, 'to_id', 'id');
     }
     public function post()
     {

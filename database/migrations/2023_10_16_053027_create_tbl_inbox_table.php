@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('tbl_inbox', function (Blueprint $table) {
             $table->id();
             $table->string('inbox_key');
-            $table->integer('user_id')->unsigned();
+            $table->integer('from_id')->unsigned();
+            $table->integer('to_id')->unsigned();
             $table->string('post_item_key');
-            $table->integer('is_read')->unsigned();
+            $table->integer('read_by_sender')->unsigned();
+            $table->integer('read_by_receiver')->unsigned();
             $table->timestamps();
         });
     }
