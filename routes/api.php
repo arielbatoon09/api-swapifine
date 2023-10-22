@@ -2,16 +2,20 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Broadcast;
 
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\InboxController;
+
+use App\Events\MessageEvent;
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\Admin\AdminManagementController;
 use App\Http\Controllers\Admin\UserManagementController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use App\Http\Controllers\Admin\AdminManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +76,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/register', [UserAuthController::class, 'register']);
 Route::post('/login', [UserAuthController::class, 'login']);
 
+
 // Protected API Endpoints
 Route::middleware('auth:sanctum')->group(function () {
     // Common Endpoint
@@ -92,6 +97,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/geocoding/{location}', [LocationController::class, 'GetSearchLocation']);
     Route::get('/location/list', [LocationController::class, 'GetUserLocation']);
     Route::post('/post/location', [LocationController::class, 'PostLocation']);
+
+    // Inbox Endpoint
+    Route::get('/inbox/list', [InboxController::class, 'GetAllContacts']);
+    Route::post('/inbox/inquire', [InboxController::class, 'TapToInquire']);
+    Route::post('/inbox/update/is-read', [InboxController::class, 'UpdateIsReadStatus']);
+    Route::post('/inbox/messages', [InboxController::class, 'GetMessagesByID']);
+    Route::post('/inbox/send-message', [InboxController::class, 'ComposeMessage']);
+
 });
 
 // Email Verification Routes

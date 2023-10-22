@@ -11,6 +11,7 @@
 1. Composer install -- Newly setup
 2. php artisan db:seed --class=CategorySeeder - To migrate all the given Categories
 3. Make sure to enable this extension in php.ini -> extension=gd
+4. To run websocket in development: php artisan websockets:serve
 
 ## About Laravel
 
