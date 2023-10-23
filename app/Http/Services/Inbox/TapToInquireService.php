@@ -37,7 +37,7 @@ class TapToInquireService
         self::$messageModel = new Message();
 
         // Inquire Message
-        self::$inquireMsg = 'Hi, is this available?';
+        self::$inquireMsg = 'Start a conversation with the vendor now! 🤝';
     }
 
     public static function TapToInquire(Request $request)

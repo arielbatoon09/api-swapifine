@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\PostItem;
 
+use Illuminate\Support\Str;
 use Throwable;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -12,7 +13,12 @@ class GetPostDetailsService
     {
         try {
             $postId = $request->id;
-            $postWithImages = Post::with('images')->find($postId);
+
+            if (Str::startsWith($postId, 'REF_ITEM')) {
+                $postWithImages = Post::with('images')->where('item_key', $postId)->first();
+            } else {
+                $postWithImages = Post::with('images')->find($postId);
+            }
 
             if ($postWithImages) {
                 $postData = [

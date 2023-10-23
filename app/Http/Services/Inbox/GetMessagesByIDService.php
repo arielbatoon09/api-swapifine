@@ -24,6 +24,7 @@ class GetMessagesByIDService
                     'id' => $message->id,
                     'msg_inbox_key' => $message->msg_inbox_key,
                     'post_item_id' => $message->inbox->post->id,
+                    'post_item_key' => $message->inbox->post->item_key,
                     'post_item_title' => $message->inbox->post->item_name,
                     'from_user_fullname' => $message->from_user->fullname,
                     'from_user_id' => $message->from_user->id,
