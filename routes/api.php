@@ -11,6 +11,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\InboxController;
+use App\Http\Controllers\CreditsController;
+use App\Http\Controllers\TransactionsController;
 
 use App\Events\MessageEvent;
 
@@ -96,6 +98,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/inbox/messages', [InboxController::class, 'GetMessagesByID']);
     Route::post('/inbox/send-message', [InboxController::class, 'ComposeMessage']);
 
+    // Buy Credits
+    Route::get('/checkout/list', [CreditsController::class, 'GetAllCheckoutCredits']);
+    Route::post('/checkout/completed', [CreditsController::class, 'CompletePayment']);
+    Route::post('/checkout', [CreditsController::class, 'CheckoutCredits']);
+    Route::post('/checkout/cancel', [CreditsController::class, 'CancelCheckout']);
+    Route::post('/checkout/delete', [CreditsController::class, 'DeleteCheckout']);
+
+    // User Transactions
+    Route::get('/transaction/list', [TransactionsController::class, 'GetUserTransactions']);
+    Route::post('/transaction/additional-info', [TransactionsController::class, 'GetAdditionalInformation']);
+    Route::post('/transaction/create', [TransactionsController::class, 'OpenTransactions']);
+    Route::post('/transaction/proceed', [TransactionsController::class, 'ProceedTransactions']);
+    Route::post('/transaction/additional', [TransactionsController::class, 'AdditionalInformation']);
+    Route::post('/transaction/rate', [TransactionsController::class, 'RateVendor']);
 });
 
 // Email Verification Routes
