@@ -82,6 +82,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/post/item', [PostController::class, 'PostItem']);
     Route::post('/view/item', [PostController::class, 'GetPostDetails']);
     Route::post('/browse/recent-post', [PostController::class, 'GetRecentViewedPost']);
+    Route::post('/wishlist/add', [PostController::class,'AddWishList']);
 
     // Category Endpoint
     Route::get('/category/list', [CategoryController::class, 'GetAllCategory']);
@@ -112,6 +113,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/transaction/proceed', [TransactionsController::class, 'ProceedTransactions']);
     Route::post('/transaction/additional', [TransactionsController::class, 'AdditionalInformation']);
     Route::post('/transaction/rate', [TransactionsController::class, 'RateVendor']);
+
+    // My Store
+    Route::get('/mystore/user-post', [PostController::class, 'GetPostByUserID']);
 });
 
 // Email Verification Routes

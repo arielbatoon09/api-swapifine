@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Location;
+use App\Models\Wishlist;
 
 class Post extends Model
 {
@@ -45,5 +46,9 @@ class Post extends Model
     public function location()
     {
         return $this->belongsTo(Location::class, 'location_id', 'id');
+    }
+    public function wishlist()
+    {
+        return $this->hasOne(Wishlist::class, 'post_item_id', 'id');
     }
 }
