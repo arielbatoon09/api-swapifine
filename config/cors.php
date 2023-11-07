@@ -45,6 +45,7 @@ return [
         '/transaction/additional',
         '/transaction/rate',
         '/wishlist/add',
+        '/checkout/all-list',
     ],
 
     'allowed_methods' => ['*'],

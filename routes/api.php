@@ -11,6 +11,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\InboxController;
 use App\Http\Controllers\CreditsController;
 use App\Http\Controllers\TransactionsController;
+use App\Http\Controllers\UserAuthController;
 
 use App\Events\MessageEvent;
 
@@ -58,15 +59,15 @@ Route::group(['Admin Management'], function () {
     Route::post('/admin/delete/{id}', [AdminManagementController::class, 'delete']);
 });
 
-Route::group(['Verification Request'], function(){
-    Route::post('/add/verification', [PersonalInfoController::class, 'addVerification']);
-    Route::get('/userVerification/list', [PersonalInfoController::class, 'verificationList']);
-});
+// Route::group(['Verification Request'], function(){
+//     Route::post('/add/verification', [PersonalInfoController::class, 'addVerification']);
+//     Route::get('/userVerification/list', [PersonalInfoController::class, 'verificationList']);
+// });
 
-Route::group(['Super Admin'], function(){
-    Route::post('/SuperAdmin/EmailUpdate', [SuperAdminController::class, 'EmailUpdate']);
-    Route::post('/SuperAdmin/UpdatePassword', [SuperAdminController::class, 'PasswordUpdate']);
-});
+// Route::group(['Super Admin'], function(){
+//     Route::post('/SuperAdmin/EmailUpdate', [SuperAdminController::class, 'EmailUpdate']);
+//     Route::post('/SuperAdmin/UpdatePassword', [SuperAdminController::class, 'PasswordUpdate']);
+// });
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -126,6 +127,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // My Store
     Route::get('/mystore/user-post', [PostController::class, 'GetPostByUserID']);
 });
+
+
+// Admin Unauthenticated Routes
+Route::get('/checkout/all-list', [CreditsController::class, 'GetEveryCreditsHistory']);
 
 // Email Verification Routes
 Route::get('/email/verify', function () {

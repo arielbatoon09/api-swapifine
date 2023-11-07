@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\Credits\GetAllCheckoutCreditsService;
+use App\Http\Services\Credits\GetEveryCreditsHistoryService;
 use App\Http\Services\Credits\CompletePaymentService;
 use App\Http\Services\Credits\CancelCheckoutService;
 use App\Http\Services\Credits\CheckoutCreditsService;
@@ -14,6 +15,10 @@ class CreditsController extends Controller
     public function GetAllCheckoutCredits()
     {
         return GetAllCheckoutCreditsService::GetAllCheckoutCredits();
+    }
+    public function GetEveryCreditsHistory()
+    {
+        return GetEveryCreditsHistoryService::GetEveryCreditsHistory();
     }
     public function CompletePayment(Request $request)
     {

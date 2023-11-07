@@ -28,6 +28,11 @@ class Transactions extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function buyer_user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
     public function inbox()
     {
         return $this->hasOne(Inbox::class,'inbox_key', 'msg_inbox_key');

@@ -11,7 +11,7 @@ class GetUserTransactionsService
     public static function GetUserTransactions()
     {
         try {
-            $transactions = Transactions::with('user', 'inbox')
+            $transactions = Transactions::with('user', 'inbox', 'buyer_user')
             ->where(function ($query) {
                 $user_id = Auth::user()->id;
                 $query->where('user_id', $user_id)
@@ -25,6 +25,7 @@ class GetUserTransactionsService
                 'user_id' => $transaction->user_id,
                 'vendor_id' => $transaction->vendor_id,
                 'vendor_name' => $transaction->inbox->post->user->fullname,
+                'buyer_name' => $transaction->inbox->from_user->fullname,
                 'msg_inbox_key' => $transaction->msg_inbox_key,
                 'payment_method' => $transaction->payment_method,
                 'delivery_address' => $transaction->delivery_address,
