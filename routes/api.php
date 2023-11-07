@@ -131,7 +131,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Admin Unauthenticated Routes
 Route::get('/checkout/all-list', [CreditsController::class, 'GetEveryCreditsHistory']);
-Route::get('/checkout/getCreditsByID', [CreditsController::class, 'GetCreditsByID']);
+Route::post('/checkout/getCreditsByID', [CreditsController::class, 'GetCreditsByID']);
 Route::get('/transaction/all-list', [TransactionsController::class, 'GetEveryTransactionsHistory']);
 
 // Email Verification Routes
