@@ -36,6 +36,7 @@ class GetEveryTransactionsHistoryService
                     'item_name' => $transaction->inbox->post->item_name,
                     'transaction_type' => $transaction->inbox->post->item_for_type,
                     'amount' => $transaction->inbox->post->item_cash_value,
+                    'status' => $transaction->status,
                     'transaction_date' => date('Y-m-d H:i:s', strtotime($transaction->created_at)),
                     'updated_date' => date('Y-m-d H:i:s', strtotime($transaction->updated_at)),
                 ];
