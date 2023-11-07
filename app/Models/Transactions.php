@@ -27,7 +27,10 @@ class Transactions extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-
+    public function vendor()
+    {
+        return $this->belongsTo(User::class, 'vendor_id', 'id');
+    }
     public function buyer_user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
