@@ -47,6 +47,7 @@ return [
         '/wishlist/add',
         '/checkout/all-list',
         '/transaction/all-list',
+        '/checkout/getCreditsByID',
     ],
 
     'allowed_methods' => ['*'],

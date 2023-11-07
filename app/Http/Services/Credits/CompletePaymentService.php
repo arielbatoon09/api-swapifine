@@ -3,7 +3,6 @@
 namespace App\Http\Services\Credits;
 
 use Throwable;
-use Illuminate\Support\Facades\Auth;
 use App\Models\PurchaseCredits;
 use App\Models\User;
 use Illuminate\Http\Request;

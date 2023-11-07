@@ -9,6 +9,7 @@ use App\Http\Services\Credits\CompletePaymentService;
 use App\Http\Services\Credits\CancelCheckoutService;
 use App\Http\Services\Credits\CheckoutCreditsService;
 use App\Http\Services\Credits\DeleteCheckoutService;
+use App\Http\Services\Credits\GetCreditsByIDService;
 
 class CreditsController extends Controller
 {
@@ -19,6 +20,10 @@ class CreditsController extends Controller
     public function GetEveryCreditsHistory()
     {
         return GetEveryCreditsHistoryService::GetEveryCreditsHistory();
+    }
+    public function GetCreditsByID(Request $request)
+    {
+        return GetCreditsByIDService::GetCreditsByID($request);
     }
     public function CompletePayment(Request $request)
     {
