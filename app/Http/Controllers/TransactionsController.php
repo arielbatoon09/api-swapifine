@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\Transactions\OpenTransactionsService;
 use App\Http\Services\Transactions\GetUserTransactionsService;
+use App\Http\Services\Transactions\GetEveryTransactionsHistoryService;
 use App\Http\Services\Transactions\ProceedTransactionsService;
 use App\Http\Services\Transactions\AdditionalInformationService;
 use App\Http\Services\Transactions\GetAdditionalInformationService;
@@ -15,6 +16,10 @@ class TransactionsController extends Controller
     public function GetUserTransactions()
     {
         return GetUserTransactionsService::GetUserTransactions();
+    }
+    public function GetEveryTransactionsHistory()
+    {
+        return GetEveryTransactionsHistoryService::GetEveryTransactionsHistory();
     }
     public function ProceedTransactions(Request $request)
     {
