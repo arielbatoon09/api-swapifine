@@ -37,7 +37,7 @@ class GetEveryTransactionsHistoryService
                     'transaction_type' => $transaction->inbox->post->item_for_type,
                     'amount' => $transaction->inbox->post->item_cash_value,
                     'transaction_date' => date('Y-m-d H:i:s', strtotime($transaction->created_at)),
-                    'updated_date' => date('Y-m-d H:i:s', strtotime($transaction->created_at)),
+                    'updated_date' => date('Y-m-d H:i:s', strtotime($transaction->updated_at)),
                 ];
             }
 
