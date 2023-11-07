@@ -15,6 +15,7 @@ class GetCreditsByIDService
 
             $creditsData[] = [
                 'id' => $credits->id,
+                'product_name' => $credits->purchase_name,
                 'user_fullname' => $credits->user->fullname,
                 'transaction_date' => date('Y-m-d H:i:s', strtotime($credits->created_at)),
             ];
