@@ -3,6 +3,7 @@
 namespace App\Http\Services\PostItem;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 class GetTop3PostCategoryService
@@ -27,13 +28,15 @@ class GetTop3PostCategoryService
             }
 
             // Retrieve posts that belong to the top 3 category IDs using Eloquent
-            $postsWithImages = Post::with(['images', 'user', 'category','location'])
+            $postsWithImages = Post::with(['images', 'user', 'category','location', 'wishlist'])
                 ->where('is_available', 1)
                 ->whereIn('category_id', $topCategoryIds)
                 ->get();
 
             // Group the post data by category_id and include category_name
             $groupedData = [];
+            $user = Auth::user();
+
             foreach ($postsWithImages as $post) {
                 $category_id = $post->category_id;
                 if (!isset($groupedData[$category_id])) {
@@ -41,6 +44,15 @@ class GetTop3PostCategoryService
                         'category_name' => $post->category->category_name,
                         'posts' => [],
                     ];
+                }
+
+                // Wishlist check
+                $added_user_wishlist = false; 
+            
+                if ($post->wishlist && $user) {
+                    if ($post->wishlist->user_id === $user->id && $post->wishlist->post_item_id === $post->id) {
+                        $added_user_wishlist = true;
+                    }
                 }
 
                 // Limit the number of posts per category to less than 5
@@ -54,6 +66,7 @@ class GetTop3PostCategoryService
                         'post_address' => $post->location->address,
                         'post_latitude' => $post->location->latitude,
                         'post_longitude' => $post->location->longitude,
+                        'added_user_wishlist' => $added_user_wishlist,
                     ];
                 }
             }

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Message;
+use App\Models\Category;
 
 class Inbox extends Model
 {
@@ -42,5 +43,9 @@ class Inbox extends Model
     public function message()
     {
         return $this->hasMany(Message::class, 'msg_inbox_key', 'inbox_key');
+    }
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'category_id', 'id');
     }
 }

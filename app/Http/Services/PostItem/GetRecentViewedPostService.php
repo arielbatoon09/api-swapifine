@@ -12,6 +12,7 @@ class GetRecentViewedPostService
     {
         try {
             $inputData = $request->id;
+            
 
             if (is_array($inputData)) {
                 $postIds = array_values(array_unique($inputData));
@@ -21,12 +22,14 @@ class GetRecentViewedPostService
             }
 
             if (!empty($postIds)) {
-                $postsWithImages = Post::with('images','location')
+                $postsWithImages = Post::with('images', 'location', 'wishlist')
                     ->whereIn('id', $postIds)
                     ->get();
 
+
                 if ($postsWithImages->isNotEmpty()) {
                     $postData = $postsWithImages->map(function ($post) {
+
                         return [
                             'id' => $post->id,
                             'item_name' => $post->item_name,

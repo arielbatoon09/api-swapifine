@@ -8,6 +8,8 @@ use App\Http\Services\PostItem\GetAllPostItemService;
 use App\Http\Services\PostItem\GetPostDetailsService;
 use App\Http\Services\PostItem\GetTop3PostCategoryService;
 use App\Http\Services\PostItem\GetRecentViewedPostService;
+use App\Http\Services\PostItem\AddWishListService;
+use App\Http\Services\MyStore\GetPostByUserIDService;
 
 class PostController extends Controller
 {
@@ -32,6 +34,14 @@ class PostController extends Controller
     public function GetRecentViewedPost(Request $request)
     {
         return GetRecentViewedPostService::GetRecentViewedPost($request);
+    }
+    public function AddWishList(Request $request)
+    {
+        return AddWishListService::AddWishList($request);
+    }
+    public function GetPostByUserID()
+    {
+        return GetPostByUserIDService::GetPostByUserID();
     }
 
 }
