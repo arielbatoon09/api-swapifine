@@ -21,11 +21,6 @@ class GetEveryVerificationListService
                     'user_id' => $verification->user_id,
                     'legal_name' => $verification->legal_name,
                     'email' => $verification->user->email,
-                    'address' => $verification->address,
-                    'city' => $verification->city,
-                    'zip_code' => $verification->zip_code,
-                    'dob' => $verification->dob,
-                    'document_id' => $verification->img_file_path,
                     'status' => $verification->status,
                     'date_of_request' => date('Y-m-d H:i:s', strtotime($verification->created_at)),
                 ];

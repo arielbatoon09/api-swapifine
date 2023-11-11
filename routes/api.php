@@ -139,6 +139,8 @@ Route::post('/checkout/getCreditsByID', [CreditsController::class, 'GetCreditsBy
 Route::get('/transaction/all-list', [TransactionsController::class, 'GetEveryTransactionsHistory']);
 Route::post('/transaction/getTransactionsByID', [TransactionsController::class, 'GetTransactionsByID']);
 Route::get('/verification/all-list', [VerificationController::class, 'GetEveryVerificationList']);
+Route::get('/verification/getVerificationListByID', [VerificationController::class, 'GetVerificationListByID']);
+Route::post('/verification/updateVerificationStatus', [VerificationController::class, 'UpdateVerificationStatus']);
 
 // Email Verification Routes
 Route::get('/email/verify', function () {

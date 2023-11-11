@@ -51,6 +51,7 @@ return [
         '/transaction/getTransactionsByID',
         '/verification-request',
         '/verification/all-list',
+        '/verification/getVerificationListByID',
     ],
 
     'allowed_methods' => ['*'],
