@@ -32,6 +32,7 @@ class GetVerificationListByIDService
                 'zip_code' => $verification->zip_code,
                 'dob' => $verification->dob,
                 'document_id' => $verification->img_file_path,
+                'status' => $verification->status,
                 'date_of_request' => date('Y-m-d H:i:s', strtotime($verification->created_at)),
             ];
 
