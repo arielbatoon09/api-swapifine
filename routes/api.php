@@ -133,6 +133,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/checkout/all-list', [CreditsController::class, 'GetEveryCreditsHistory']);
 Route::post('/checkout/getCreditsByID', [CreditsController::class, 'GetCreditsByID']);
 Route::get('/transaction/all-list', [TransactionsController::class, 'GetEveryTransactionsHistory']);
+Route::post('/transaction/getTransactionsByID', [TransactionsController::class, 'GetTransactionsByID']);
 
 // Email Verification Routes
 Route::get('/email/verify', function () {

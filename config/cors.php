@@ -48,6 +48,7 @@ return [
         '/checkout/all-list',
         '/transaction/all-list',
         '/checkout/getCreditsByID',
+        '/transaction/getTransactionsByID',
     ],
 
     'allowed_methods' => ['*'],

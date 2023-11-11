@@ -9,6 +9,7 @@ use App\Http\Services\Transactions\GetEveryTransactionsHistoryService;
 use App\Http\Services\Transactions\ProceedTransactionsService;
 use App\Http\Services\Transactions\AdditionalInformationService;
 use App\Http\Services\Transactions\GetAdditionalInformationService;
+use App\Http\Services\Transactions\GetTransactionsByIDService;
 use App\Http\Services\Transactions\RateVendorService;
 
 class TransactionsController extends Controller
@@ -36,6 +37,10 @@ class TransactionsController extends Controller
     public function OpenTransactions(Request $request)
     {
         return OpenTransactionsService::OpenTransactions($request);
+    }
+    public function GetTransactionsByID(Request $request)
+    {
+        return GetTransactionsByIDService::GetTransactionsByID($request);
     }
     public function RateVendor(Request $request)
     {
