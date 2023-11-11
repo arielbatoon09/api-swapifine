@@ -15,6 +15,14 @@ class PostVerificationRequestService
             $verification = new Verification();
 
             $checkUser = $verification::where('user_id', Auth::user()->id)->first();
+
+            if (filter_var($request->zip_code, FILTER_VALIDATE_INT) === false) {
+                return response([
+                    'status' => 'error',
+                    'message' => "Invalid Zip Code",
+                ]);
+            }
+
             if (!$checkUser) {
                 if (
                     !empty($request->legal_name) && !empty($request->address) && !empty($request->city) && !empty($request->zip_code) && !empty($request->dob)

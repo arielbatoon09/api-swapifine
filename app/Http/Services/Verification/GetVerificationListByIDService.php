@@ -23,7 +23,7 @@ class GetVerificationListByIDService
                 ]);
             }
 
-            $data = [
+            $data[] = [
                 'id' => $verification->id,
                 'legal_name' => $verification->legal_name,
                 'email' => $verification->user->email,
