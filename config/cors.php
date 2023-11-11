@@ -52,6 +52,7 @@ return [
         '/verification-request',
         '/verification/all-list',
         '/verification/getVerificationListByID',
+        '/verification/updateVerificationStatus',
     ],
 
     'allowed_methods' => ['*'],
