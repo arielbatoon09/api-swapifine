@@ -10,21 +10,26 @@ class GetAllCategoryService
     public static function GetAllCategory()
     {
         try {
-            $categoryData = Category::all();
-            if ($categoryData->isEmpty()) {
-                return response([
-                    'status' => 'error',
-                    'message' => 'Data not found!',
-                ]);
-            } else {
-                return response([
-                    'status' => 'success',
-                    'data' => $categoryData,
-                ]);
-            }
+            $categories = Category::with('post')->get();
 
+            $categoryData = [];
+            
+            foreach ($categories as $category) {
+                $categoryData[$category->id] = [
+                    'id' => $category->id,
+                    'category_name' => $category->category_name,
+                    'total_post' => $category->post->count(),
+                    'created_date' => date('Y-m-d H:i:s', strtotime($category->created_at)),
+                    'updated_at' => date('Y-m-d H:i:s', strtotime($category->updated_at)),
+                ];
+            }
+            
+            return response([
+                'status' => 'success',
+                'data' => $categoryData,
+            ]);
         } catch (Throwable $e) {
-            return 'Error Catch: ' . $e->getMessage(); 
+            return 'Error Catch: ' . $e->getMessage();
         }
     }
 }
