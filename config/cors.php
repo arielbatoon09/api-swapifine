@@ -49,6 +49,8 @@ return [
         '/transaction/all-list',
         '/checkout/getCreditsByID',
         '/transaction/getTransactionsByID',
+        '/verification-request',
+        '/verification/all-list',
     ],
 
     'allowed_methods' => ['*'],

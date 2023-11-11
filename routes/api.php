@@ -12,6 +12,7 @@ use App\Http\Controllers\InboxController;
 use App\Http\Controllers\CreditsController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\VerificationController;
 
 use App\Events\MessageEvent;
 
@@ -126,6 +127,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // My Store
     Route::get('/mystore/user-post', [PostController::class, 'GetPostByUserID']);
+
+    // Verification
+    Route::post('/verification-request', [VerificationController::class, 'PostVerificationRequest']);
 });
 
 
@@ -134,6 +138,7 @@ Route::get('/checkout/all-list', [CreditsController::class, 'GetEveryCreditsHist
 Route::post('/checkout/getCreditsByID', [CreditsController::class, 'GetCreditsByID']);
 Route::get('/transaction/all-list', [TransactionsController::class, 'GetEveryTransactionsHistory']);
 Route::post('/transaction/getTransactionsByID', [TransactionsController::class, 'GetTransactionsByID']);
+Route::get('/verification/all-list', [VerificationController::class, 'GetEveryVerificationList']);
 
 // Email Verification Routes
 Route::get('/email/verify', function () {
