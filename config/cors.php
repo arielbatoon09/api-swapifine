@@ -55,6 +55,8 @@ return [
         '/verification/updateVerificationStatus',
         '/admin/top-users',
         '/admin/totals',
+        '/report-user',
+        '/reported-user/all-list',
     ],
 
     'allowed_methods' => ['*'],

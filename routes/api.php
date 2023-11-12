@@ -14,6 +14,7 @@ use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportedUserController;
 
 use App\Events\MessageEvent;
 
@@ -131,6 +132,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Verification
     Route::post('/verification-request', [VerificationController::class, 'PostVerificationRequest']);
+
+    // Report User
+    Route::post('/report-user', [ReportedUserController::class, 'PostReportUser']);
 });
 
 
@@ -144,6 +148,7 @@ Route::post('/verification/getVerificationListByID', [VerificationController::cl
 Route::post('/verification/updateVerificationStatus', [VerificationController::class, 'UpdateVerificationStatus']);
 Route::post('/admin/top-users', [UserController::class, 'TopUsersByPosts']);
 Route::post('/admin/totals', [UserController::class, 'TotalNumbers']);
+Route::get('/reported-user/all-list', [ReportedUserController::class, 'GetEveryReportedUser']);
 
 // Email Verification Routes
 Route::get('/email/verify', function () {

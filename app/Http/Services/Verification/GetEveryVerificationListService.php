@@ -3,8 +3,6 @@
 namespace App\Http\Services\Verification;
 
 use Throwable;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Models\Verification;
 
 class GetEveryVerificationListService
