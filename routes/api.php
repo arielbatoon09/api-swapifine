@@ -13,6 +13,7 @@ use App\Http\Controllers\CreditsController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\UserController;
 
 use App\Events\MessageEvent;
 
@@ -141,6 +142,7 @@ Route::post('/transaction/getTransactionsByID', [TransactionsController::class, 
 Route::get('/verification/all-list', [VerificationController::class, 'GetEveryVerificationList']);
 Route::post('/verification/getVerificationListByID', [VerificationController::class, 'GetVerificationListByID']);
 Route::post('/verification/updateVerificationStatus', [VerificationController::class, 'UpdateVerificationStatus']);
+Route::post('/admin/top-users', [UserController::class, 'TopUsersByPosts']);
 
 // Email Verification Routes
 Route::get('/email/verify', function () {

@@ -53,6 +53,7 @@ return [
         '/verification/all-list',
         '/verification/getVerificationListByID',
         '/verification/updateVerificationStatus',
+        '/admin/top-users',
     ],
 
     'allowed_methods' => ['*'],
