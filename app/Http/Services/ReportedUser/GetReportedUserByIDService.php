@@ -26,7 +26,7 @@ class GetReportedUserByIDService
             $data[] = [
                 'id' => $reportedUser->id,
                 'fullname' => $reportedUser->user->fullname,
-                'reported_by' => $reportedUser->message,
+                'message' => $reportedUser->message,
                 'proof_img_path' => $reportedUser->proof_img_path,
             ];
 
