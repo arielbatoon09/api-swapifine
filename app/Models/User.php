@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Post;
+use App\Models\ReportedUser;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -53,6 +54,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function post()
     {
         return $this->belongsTo(Post::class, 'id', 'user_id');
+    }
+    public function report()
+    {
+        return $this->belongsTo(ReportedUser::class, 'id', 'user_id');
     }
     
 }

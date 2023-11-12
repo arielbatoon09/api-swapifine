@@ -58,6 +58,9 @@ return [
         '/report-user',
         '/reported-user/all-list',
         '/reported-user/getReportedUserByID',
+        '/user/list',
+        '/user/update',
+        '/user/delete/*',
     ],
 
     'allowed_methods' => ['*'],

@@ -8,19 +8,29 @@ use Illuminate\Http\Request;
 
 class UserManagementService
 {
-    public static function GetAllUserList() {
+    public static function GetAllUserList()
+    {
         try {
-            $allusers = User::all();
-            if($allusers->isEmpty()) {
-                return response([
-                    'source' => 'UserListNotFound',
-                    'status' => 'error',
-                    'message' => 'Unknown Users',
-                ]);
-            } else {
-                return $allusers;
-            }
+            $users = User::withCount('report')
+                ->orderByDesc('report_count')
+                ->get();
 
+            $usersData = $users->map(function ($user) {
+                return [
+                    'id' => $user->id,
+                    'fullname' => $user->fullname,
+                    'email' => $user->email,
+                    'total_report' => $user->report_count,
+                    'profile_img' => $user->profile_img,
+                    'created_date' => date('Y-m-d H:i:s', strtotime($user->created_at)),
+                    'updated_date' => date('Y-m-d H:i:s', strtotime($user->updated_at)),
+                ];
+            });
+
+            return response([
+                'status' => 'success',
+                'data' => $usersData,
+            ]);
         } catch (Throwable $error) {
             response([
                 'source' => 'error',
@@ -29,11 +39,12 @@ class UserManagementService
         }
     }
 
-    public static function UpdateUserByID(Request $request){
+    public static function UpdateUserByID(Request $request)
+    {
         try {
-            if(!empty($request->email)){
+            if (!empty($request->email)) {
                 $updateUser = User::where('email', $request->email)->first();
-                if(!$updateUser){
+                if (!$updateUser) {
                     $resource = User::findorFail($request->input('id'));
                     $resource->update([
                         'fullname' => $request->input('fullname'),
@@ -57,7 +68,7 @@ class UserManagementService
                     'message' => 'Enter valid email.',
                 ]);
             }
-        } catch (Throwable $error){
+        } catch (Throwable $error) {
             response([
                 'source' => 'error',
                 'message' => 'ERROR' . $error
@@ -65,10 +76,11 @@ class UserManagementService
         }
     }
 
-    public static function DeleteUserByID($id){
+    public static function DeleteUserByID($id)
+    {
         try {
             $deleteUser = User::find($id)->delete();
-            if($deleteUser){
+            if ($deleteUser) {
                 return response([
                     'status' => 'success',
                     'message' => "User deleted.",
@@ -80,12 +92,12 @@ class UserManagementService
                     'message' => 'User could not be deleted.',
                 ]);
             }
-        } catch (Throwable $error){
+        } catch (Throwable $error) {
             return response([
                 'source' => 'error',
                 'status' => 'ERROR',
                 'message' => 'ERROR' . $error->getMessage(),
             ]);
-        }     
+        }
     }
 }
