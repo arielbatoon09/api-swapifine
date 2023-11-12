@@ -48,11 +48,11 @@ Route::group(['Category Management'], function () {
 });
 
 // USER MANAGEMENT
-Route::group(['User Management'], function () {
-    Route::get('/user/list', [UserManagementController::class, 'userList']);
-    Route::post('/user/update', [UserManagementController::class, 'update']);
-    Route::post('/user/delete/{id}', [UserManagementController::class, 'delete']);
-});
+// Route::group(['User Management'], function () {
+//     Route::get('/user/list', [UserManagementController::class, 'userList']);
+//     Route::post('/user/update', [UserManagementController::class, 'update']);
+//     Route::post('/user/delete/{id}', [UserManagementController::class, 'delete']);
+// });
 
 // ADMIN MANAGEMENT
 Route::group(['Admin Management'], function () {
@@ -150,6 +150,10 @@ Route::post('/admin/top-users', [UserController::class, 'TopUsersByPosts']);
 Route::post('/admin/totals', [UserController::class, 'TotalNumbers']);
 Route::get('/reported-user/all-list', [ReportedUserController::class, 'GetEveryReportedUser']);
 Route::post('/reported-user/getReportedUserByID', [ReportedUserController::class, 'GetReportedUserByID']);
+
+Route::get('/user/list', [UserController::class, 'GetAllUserList']);
+Route::post('/user/update', [UserController::class, 'UpdateUserByID']);
+Route::post('/user/delete/{id}', [UserController::class, 'DeleteUserByID']);
 
 // Email Verification Routes
 Route::get('/email/verify', function () {
