@@ -18,6 +18,7 @@ class GetEveryReportedUserService
                 $reportedUserData[] = [
                     'id' => $reportedUser->id,
                     'user_id' => $reportedUser->user_id,
+                    'fullname' => $reportedUser->user->fullname,
                     'email' => $reportedUser->user->email,
                     'reported_by' => $reportedUser->reported_by,
                     'proof_img_path' => $reportedUser->proof_img_path,

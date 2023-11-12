@@ -57,6 +57,7 @@ return [
         '/admin/totals',
         '/report-user',
         '/reported-user/all-list',
+        '/reported-user/getReportedUserByID',
     ],
 
     'allowed_methods' => ['*'],
