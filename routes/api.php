@@ -143,6 +143,7 @@ Route::get('/verification/all-list', [VerificationController::class, 'GetEveryVe
 Route::post('/verification/getVerificationListByID', [VerificationController::class, 'GetVerificationListByID']);
 Route::post('/verification/updateVerificationStatus', [VerificationController::class, 'UpdateVerificationStatus']);
 Route::post('/admin/top-users', [UserController::class, 'TopUsersByPosts']);
+Route::post('/admin/totals', [UserController::class, 'TotalNumbers']);
 
 // Email Verification Routes
 Route::get('/email/verify', function () {
