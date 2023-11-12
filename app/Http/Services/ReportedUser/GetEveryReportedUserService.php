@@ -21,7 +21,6 @@ class GetEveryReportedUserService
                     'fullname' => $reportedUser->user->fullname,
                     'email' => $reportedUser->user->email,
                     'reported_by' => $reportedUser->reported_by,
-                    'proof_img_path' => $reportedUser->proof_img_path,
                     'date_reported' => date('Y-m-d H:i:s', strtotime($reportedUser->created_at)),
                 ];
             }
