@@ -73,9 +73,30 @@ Route::group(['Admin Management'], function () {
 // });
 
 
-Route::middleware('auth:sanctum')->group(function () {
+// Route::middleware('auth:sanctum')->group(function () {
+//     Route::get('/admin/logout', [AdminAuthController::class, 'logout']);
+// });
+
+Route::group(['Admin'], function () {
+
     Route::get('/admin/logout', [AdminAuthController::class, 'logout']);
-});
+    Route::get('/checkout/all-list', [CreditsController::class, 'GetEveryCreditsHistory']);
+    Route::post('/checkout/getCreditsByID', [CreditsController::class, 'GetCreditsByID']);
+    Route::get('/transaction/all-list', [TransactionsController::class, 'GetEveryTransactionsHistory']);
+    Route::post('/transaction/getTransactionsByID', [TransactionsController::class, 'GetTransactionsByID']);
+    Route::get('/verification/all-list', [VerificationController::class, 'GetEveryVerificationList']);
+    Route::post('/verification/getVerificationListByID', [VerificationController::class, 'GetVerificationListByID']);
+    Route::post('/verification/updateVerificationStatus', [VerificationController::class, 'UpdateVerificationStatus']);
+    Route::post('/admin/top-users', [UserController::class, 'TopUsersByPosts']);
+    Route::post('/admin/totals', [UserController::class, 'TotalNumbers']);
+    Route::get('/reported-user/all-list', [ReportedUserController::class, 'GetEveryReportedUser']);
+    Route::post('/reported-user/getReportedUserByID', [ReportedUserController::class, 'GetReportedUserByID']);
+
+    Route::get('/user/list', [UserController::class, 'GetAllUserList']);
+    Route::post('/user/update', [UserController::class, 'UpdateUserByID']);
+    Route::post('/user/delete/{id}', [UserController::class, 'DeleteUserByID']);
+    
+})->middleware('auth:sanctum');
 
 
 // Guest API Endpoints
@@ -95,7 +116,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/post/item', [PostController::class, 'PostItem']);
     Route::post('/view/item', [PostController::class, 'GetPostDetails']);
     Route::post('/browse/recent-post', [PostController::class, 'GetRecentViewedPost']);
-    Route::post('/wishlist/add', [PostController::class,'AddWishList']);
+    Route::post('/wishlist/add', [PostController::class, 'AddWishList']);
 
     // Category Endpoint
     Route::get('/category/list', [CategoryController::class, 'GetAllCategory']);
@@ -139,21 +160,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 // Admin Unauthenticated Routes
-Route::get('/checkout/all-list', [CreditsController::class, 'GetEveryCreditsHistory']);
-Route::post('/checkout/getCreditsByID', [CreditsController::class, 'GetCreditsByID']);
-Route::get('/transaction/all-list', [TransactionsController::class, 'GetEveryTransactionsHistory']);
-Route::post('/transaction/getTransactionsByID', [TransactionsController::class, 'GetTransactionsByID']);
-Route::get('/verification/all-list', [VerificationController::class, 'GetEveryVerificationList']);
-Route::post('/verification/getVerificationListByID', [VerificationController::class, 'GetVerificationListByID']);
-Route::post('/verification/updateVerificationStatus', [VerificationController::class, 'UpdateVerificationStatus']);
-Route::post('/admin/top-users', [UserController::class, 'TopUsersByPosts']);
-Route::post('/admin/totals', [UserController::class, 'TotalNumbers']);
-Route::get('/reported-user/all-list', [ReportedUserController::class, 'GetEveryReportedUser']);
-Route::post('/reported-user/getReportedUserByID', [ReportedUserController::class, 'GetReportedUserByID']);
-
-Route::get('/user/list', [UserController::class, 'GetAllUserList']);
-Route::post('/user/update', [UserController::class, 'UpdateUserByID']);
-Route::post('/user/delete/{id}', [UserController::class, 'DeleteUserByID']);
 
 // Email Verification Routes
 Route::get('/email/verify', function () {
