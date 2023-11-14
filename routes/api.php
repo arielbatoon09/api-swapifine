@@ -77,8 +77,7 @@ Route::group(['Admin Management'], function () {
 //     Route::get('/admin/logout', [AdminAuthController::class, 'logout']);
 // });
 
-Route::group(['Admin'], function () {
-
+Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/admin/logout', [AdminAuthController::class, 'logout']);
     Route::get('/checkout/all-list', [CreditsController::class, 'GetEveryCreditsHistory']);
     Route::post('/checkout/getCreditsByID', [CreditsController::class, 'GetCreditsByID']);
@@ -91,12 +90,10 @@ Route::group(['Admin'], function () {
     Route::post('/admin/totals', [UserController::class, 'TotalNumbers']);
     Route::get('/reported-user/all-list', [ReportedUserController::class, 'GetEveryReportedUser']);
     Route::post('/reported-user/getReportedUserByID', [ReportedUserController::class, 'GetReportedUserByID']);
-
     Route::get('/user/list', [UserController::class, 'GetAllUserList']);
     Route::post('/user/update', [UserController::class, 'UpdateUserByID']);
     Route::post('/user/delete/{id}', [UserController::class, 'DeleteUserByID']);
-    
-})->middleware('auth:sanctum');
+});
 
 
 // Guest API Endpoints
