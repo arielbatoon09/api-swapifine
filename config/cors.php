@@ -61,6 +61,7 @@ return [
         '/user/list',
         '/user/update',
         '/user/delete/*',
+        '/mystore/getPostImagesByID',
     ],
 
     'allowed_methods' => ['*'],

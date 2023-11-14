@@ -147,6 +147,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // My Store
     Route::get('/mystore/user-post', [PostController::class, 'GetPostByUserID']);
+    Route::post('/mystore/getPostImagesByID', [PostController::class, 'GetPostImagesByID']);
 
     // Verification
     Route::post('/verification-request', [VerificationController::class, 'PostVerificationRequest']);

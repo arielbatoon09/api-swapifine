@@ -10,6 +10,7 @@ use App\Http\Services\PostItem\GetTop3PostCategoryService;
 use App\Http\Services\PostItem\GetRecentViewedPostService;
 use App\Http\Services\PostItem\AddWishListService;
 use App\Http\Services\MyStore\GetPostByUserIDService;
+use App\Http\Services\MyStore\GetPostImagesByIDService;
 
 class PostController extends Controller
 {
@@ -42,6 +43,10 @@ class PostController extends Controller
     public function GetPostByUserID()
     {
         return GetPostByUserIDService::GetPostByUserID();
+    }
+    public function GetPostImagesByID(Request $request)
+    {
+        return GetPostImagesByIDService::GetPostImagesByID($request);
     }
 
 }
