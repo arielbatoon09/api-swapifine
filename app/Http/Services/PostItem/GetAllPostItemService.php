@@ -5,6 +5,7 @@ namespace App\Http\Services\PostItem;
 use Throwable;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use App\Models\Wishlist;
 
 class GetAllPostItemService
 {
@@ -19,13 +20,20 @@ class GetAllPostItemService
         $user = Auth::user();
         
         foreach ($postsWithImagesAndLocation as $post) {      
-            $added_user_wishlist = false; 
+
+            $wishlist = Wishlist::with(['post'])
+            ->where('post_item_id', $post->id)
+            ->get();
             
-            if ($post->wishlist && $user) {
-                if ($post->wishlist->user_id === $user->id && $post->wishlist->post_item_id === $post->id) {
+            $added_user_wishlist = false;
+
+            foreach ($wishlist as $item) {
+                if ($post->id === $item->post_item_id && $user->id === $item->user_id) {
                     $added_user_wishlist = true;
+                    break;
                 }
             }
+
 
             $postData[] = [
                 'id' => $post->id,

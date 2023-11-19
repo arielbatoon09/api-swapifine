@@ -11,6 +11,8 @@ use App\Http\Services\PostItem\GetRecentViewedPostService;
 use App\Http\Services\PostItem\AddWishListService;
 use App\Http\Services\MyStore\GetPostByUserIDService;
 use App\Http\Services\MyStore\GetPostImagesByIDService;
+use App\Http\Services\MyStore\GetWishlistImagesByUserIDService;
+use App\Http\Services\MyStore\GetWishlistImagesByIDService;
 
 class PostController extends Controller
 {
@@ -47,6 +49,14 @@ class PostController extends Controller
     public function GetPostImagesByID(Request $request)
     {
         return GetPostImagesByIDService::GetPostImagesByID($request);
+    }
+    public function GetWishlistImagesByUserID()
+    {
+        return GetWishlistImagesByUserIDService::GetWishlistImagesByUserID();
+    }
+    public function GetWishlistImagesByID(Request $request)
+    {
+        return GetWishlistImagesByIDService::GetWishlistImagesByID($request);
     }
 
 }

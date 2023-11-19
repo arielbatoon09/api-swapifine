@@ -21,6 +21,8 @@ return [
         'sanctum/csrf-cookie',
         '/login',
         'signup',
+        'https://api.maptiler.com',
+        'api.maptiler.com',
         '/home',
         '/api/email/verification-notification',
         '/post/item',
@@ -62,6 +64,8 @@ return [
         '/user/update',
         '/user/delete/*',
         '/mystore/getPostImagesByID',
+        '/mystore/user-wishlist',
+        '/mystore/getWishlistImagesByID',
     ],
 
     'allowed_methods' => ['*'],

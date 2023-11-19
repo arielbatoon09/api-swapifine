@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Post;
 
 class Wishlist extends Model
 {
@@ -15,4 +16,9 @@ class Wishlist extends Model
         'user_id',
         'post_item_id',
     ];
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'post_item_id', 'id'); 
+    }
 }

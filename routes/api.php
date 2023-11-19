@@ -148,6 +148,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // My Store
     Route::get('/mystore/user-post', [PostController::class, 'GetPostByUserID']);
     Route::post('/mystore/getPostImagesByID', [PostController::class, 'GetPostImagesByID']);
+    Route::get('/mystore/user-wishlist', [PostController::class, 'GetWishlistImagesByUserID']);
+    Route::post('/mystore/getWishlistImagesByID', [PostController::class, 'GetWishlistImagesByID']);
 
     // Verification
     Route::post('/verification-request', [VerificationController::class, 'PostVerificationRequest']);
