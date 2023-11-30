@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Ratings extends Model
 {
@@ -17,4 +18,9 @@ class Ratings extends Model
         'scale_ratings',
         'comment',
     ];
+
+    public function ratedBy()
+    {
+        return $this->belongsTo(User::class, 'rated_by_id');
+    }
 }

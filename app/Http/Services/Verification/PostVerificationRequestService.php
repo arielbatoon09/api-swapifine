@@ -4,6 +4,8 @@ namespace App\Http\Services\Verification;
 
 use Throwable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic;
 use Illuminate\Http\Request;
 use App\Models\Verification;
 
@@ -14,7 +16,9 @@ class PostVerificationRequestService
         try {
             $verification = new Verification();
 
-            $checkUser = $verification::where('user_id', Auth::user()->id)->first();
+            $checkUser = $verification::where('user_id', auth()->user()->id)
+                ->whereIn('status', ['Pending', 'Approved'])
+                ->first();
 
             if (filter_var($request->zip_code, FILTER_VALIDATE_INT) === false) {
                 return response([
@@ -26,8 +30,30 @@ class PostVerificationRequestService
             if (!$checkUser) {
                 if (
                     !empty($request->legal_name) && !empty($request->address) && !empty($request->city) && !empty($request->zip_code) && !empty($request->dob)
-                    && !empty($request->img_file_path) && !empty($request->status)
+                    && !empty($request->img_file_path)
                 ) {
+
+                    // Upload Image Path
+                    $imageDataArray = $request->input('img_file_path');
+                    $uploadPath = public_path('uploads/verification/user-' . Auth::user()->id);
+
+                    // Create the directory if it doesn't exist
+                    if (!file_exists($uploadPath)) {
+                        mkdir($uploadPath, 0755, true);
+                    }
+
+                    foreach ($imageDataArray as $imageDataObject) {
+                        // Generate a random filename
+                        $randomFileName = Str::random(50) . '.jpg';
+
+                        // Decoding the upcoming images
+                        $base64Data = $imageDataObject['data'];
+                        $utf8EncodedData = mb_convert_encoding($base64Data, 'UTF-8');
+                        $encoded = base64_encode($utf8EncodedData);
+                        $decoded = base64_decode($encoded);
+                        $image = ImageManagerStatic::make($decoded);
+                        $image->save($uploadPath . '/' . $randomFileName);
+                    }
 
                     $verification->create([
                         'user_id' => Auth::user()->id,
@@ -36,8 +62,8 @@ class PostVerificationRequestService
                         'city' => $request->city,
                         'zip_code' => $request->zip_code,
                         'dob' => $request->dob,
-                        'img_file_path' => $request->img_file_path,
-                        'status' => $request->status,
+                        'img_file_path' => env('BACKEND_URL') . '/uploads/verification/user-' . Auth::user()->id . '/' . $randomFileName,
+                        'status' => 'Pending',
                     ]);
 
                     return response([

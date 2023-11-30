@@ -30,7 +30,7 @@ class GetWishlistImagesByIDService
             foreach ($wishlist->post->images as $image) {
                 $postImageData[] = [
                     'images' => $image->img_file_path,
-                    'caption' => $wishlist->item_name,
+                    'caption' => $wishlist->post->item_name,
                 ];
             }
 

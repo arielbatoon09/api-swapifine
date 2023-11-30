@@ -15,6 +15,7 @@ use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportedUserController;
+use App\Http\Controllers\RatingsController;
 
 use App\Events\MessageEvent;
 
@@ -150,6 +151,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/mystore/getPostImagesByID', [PostController::class, 'GetPostImagesByID']);
     Route::get('/mystore/user-wishlist', [PostController::class, 'GetWishlistImagesByUserID']);
     Route::post('/mystore/getWishlistImagesByID', [PostController::class, 'GetWishlistImagesByID']);
+    Route::get('/mystore/user-ratings', [RatingsController::class, 'GetRatingsByUserID']);
 
     // Verification
     Route::post('/verification-request', [VerificationController::class, 'PostVerificationRequest']);

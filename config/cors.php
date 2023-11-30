@@ -66,6 +66,7 @@ return [
         '/mystore/getPostImagesByID',
         '/mystore/user-wishlist',
         '/mystore/getWishlistImagesByID',
+        '/mystore/user-ratings',
     ],
 
     'allowed_methods' => ['*'],

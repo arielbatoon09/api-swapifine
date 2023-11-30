@@ -20,7 +20,6 @@ class GetPostByUserIDService
             $postData = [];
 
             foreach ($postsWithImages as $post) {
-                $thumbnail = null;
 
                 $postData[] = [
                     'id' => $post->id,
