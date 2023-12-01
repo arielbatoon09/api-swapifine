@@ -162,6 +162,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/withdrawal/getWithdrawalByID', [WithdrawalController::class, 'GetWithdrawalByID']);
     Route::post('/withdrawal/updateWithdrawalStatus', [WithdrawalController::class, 'UpdateWithdrawalStatus']);
 
+    // Settings
+
     // Report User
     Route::post('/report-user', [ReportedUserController::class, 'PostReportUser']);
 });

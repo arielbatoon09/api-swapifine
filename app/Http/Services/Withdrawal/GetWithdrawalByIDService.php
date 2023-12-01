@@ -29,6 +29,7 @@ class GetWithdrawalByIDService
                 'account_number' => $withdrawal->account_number,
                 'transfer_to' => $withdrawal->transfer_to,
                 'amount' => $withdrawal->amount,
+                'status' => $withdrawal->status,
                 'date_of_request' => date('Y-m-d H:i:s', strtotime($withdrawal->created_at)),
             ];
 
