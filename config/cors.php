@@ -72,6 +72,8 @@ return [
         '/withdrawal/updateWithdrawalStatus',
         '/admin/updateBasic',
         '/admin/getDetails',
+        '/admin/deleteAdmin',
+        '/admin/changePassword',
     ],
 
     'allowed_methods' => ['*'],

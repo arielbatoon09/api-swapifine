@@ -167,6 +167,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/admin/getDetails', [AdminController::class, 'GetAdminDetails']);
     Route::post('/admin/updateBasic', [AdminController::class, 'UpdateAdminBasicInformation']);
     Route::post('/admin/changePassword', [AdminController::class, 'UpdateAdminPassword']);
+    Route::post('/admin/deleteAdmin', [AdminController::class, 'DeleteAdminAccount']);
 
     // Report User
     Route::post('/report-user', [ReportedUserController::class, 'PostReportUser']);

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\AdminDashboard\UpdateAdminBasicInformationService;
 use App\Http\Services\AdminDashboard\GetAdminDetailsService;
 use App\Http\Services\AdminDashboard\UpdateAdminPasswordService;
+use App\Http\Services\AdminDashboard\DeleteAdminAccountService;
 
 class AdminController extends Controller
 {
@@ -21,5 +22,9 @@ class AdminController extends Controller
     public function UpdateAdminPassword(Request $request)
     {
         return UpdateAdminPasswordService::UpdateAdminPassword($request);
+    }
+    public function DeleteAdminAccount()
+    {
+        return DeleteAdminAccountService::DeleteAdminAccount();
     }
 }
