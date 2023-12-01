@@ -16,6 +16,7 @@ use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportedUserController;
 use App\Http\Controllers\RatingsController;
+use App\Http\Controllers\WithdrawalController;
 
 use App\Events\MessageEvent;
 
@@ -155,6 +156,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Verification
     Route::post('/verification-request', [VerificationController::class, 'PostVerificationRequest']);
+
+    // Withdrawal
+    Route::get('/withdrawal/list', [WithdrawalController::class, 'GetEveryWithdrawalList']);
 
     // Report User
     Route::post('/report-user', [ReportedUserController::class, 'PostReportUser']);

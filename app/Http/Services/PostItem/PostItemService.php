@@ -10,6 +10,7 @@ use Intervention\Image\ImageManagerStatic;
 use App\Models\Post;
 use App\Models\Image;
 use App\Models\Location;
+use App\Models\Verification;
 
 class PostItemService
 {
@@ -47,6 +48,20 @@ class PostItemService
                     if (!self::$invalidInput) {
                         if (strlen($request->item_name) <= 60) {
                             if (strlen($request->item_description) <= 300) {
+                                // Init Verification check
+                                $verification = Verification::where('user_id', auth()->user()->id)
+                                    ->where('status', 'Approved')
+                                    ->first();
+
+                                // If not verified, return error
+                                if (!$verification) {
+                                    return response([
+                                        'status' => 'error',
+                                        'source' => 'notEligible',
+                                        'message' => "You're not eligible to list items!"
+                                    ]);
+                                }
+
                                 // Call and save the Item data into StorePostItem function
                                 $response = PostItemService::StorePostItem($request);
 

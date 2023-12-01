@@ -67,6 +67,7 @@ return [
         '/mystore/user-wishlist',
         '/mystore/getWishlistImagesByID',
         '/mystore/user-ratings',
+        '/withdrawal/list',
     ],
 
     'allowed_methods' => ['*'],
