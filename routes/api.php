@@ -164,8 +164,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/withdrawal/updateWithdrawalStatus', [WithdrawalController::class, 'UpdateWithdrawalStatus']);
 
     // Settings
-    Route::post('/admin/updateBasic', [AdminController::class, 'UpdateAdminBasicInformation']);
     Route::get('/admin/getDetails', [AdminController::class, 'GetAdminDetails']);
+    Route::post('/admin/updateBasic', [AdminController::class, 'UpdateAdminBasicInformation']);
+    Route::post('/admin/changePassword', [AdminController::class, 'UpdateAdminPassword']);
 
     // Report User
     Route::post('/report-user', [ReportedUserController::class, 'PostReportUser']);

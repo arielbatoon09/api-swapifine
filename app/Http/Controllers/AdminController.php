@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Services\AdminDashboard\UpdateAdminBasicInformationService;
 use App\Http\Services\AdminDashboard\GetAdminDetailsService;
+use App\Http\Services\AdminDashboard\UpdateAdminPasswordService;
 
 class AdminController extends Controller
 {
@@ -16,5 +17,9 @@ class AdminController extends Controller
     public function GetAdminDetails()
     {
         return GetAdminDetailsService::GetAdminDetails();
+    }
+    public function UpdateAdminPassword(Request $request)
+    {
+        return UpdateAdminPasswordService::UpdateAdminPassword($request);
     }
 }
