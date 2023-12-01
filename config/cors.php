@@ -71,6 +71,7 @@ return [
         '/withdrawal/getWithdrawalByID',
         '/withdrawal/updateWithdrawalStatus',
         '/admin/updateBasic',
+        '/admin/getDetails',
     ],
 
     'allowed_methods' => ['*'],

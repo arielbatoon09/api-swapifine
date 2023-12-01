@@ -165,6 +165,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Settings
     Route::post('/admin/updateBasic', [AdminController::class, 'UpdateAdminBasicInformation']);
+    Route::get('/admin/getDetails', [AdminController::class, 'GetAdminDetails']);
 
     // Report User
     Route::post('/report-user', [ReportedUserController::class, 'PostReportUser']);
