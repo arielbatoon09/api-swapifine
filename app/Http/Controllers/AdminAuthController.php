@@ -26,7 +26,6 @@ class AdminAuthController extends Controller
                             'fullname' => $request->input('fullname'),
                             'email' => $request->input('email'),
                             'password' => Hash::make($randomPassword), // Hash the random password
-                            'is_superadmin' => $request->input('is_superadmin', 0),
                         ]);
 
                         return response([

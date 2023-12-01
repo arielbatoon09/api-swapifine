@@ -16,7 +16,6 @@ class Admin extends Model
         'fullname',
         'email',
         'password',
-        'is_superadmin',
     ];
 
     protected $hidden = [

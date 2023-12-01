@@ -17,6 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportedUserController;
 use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\WithdrawalController;
+use App\Http\Controllers\AdminController;
 
 use App\Events\MessageEvent;
 
@@ -163,6 +164,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/withdrawal/updateWithdrawalStatus', [WithdrawalController::class, 'UpdateWithdrawalStatus']);
 
     // Settings
+    Route::post('/admin/updateBasic', [AdminController::class, 'UpdateAdminBasicInformation']);
 
     // Report User
     Route::post('/report-user', [ReportedUserController::class, 'PostReportUser']);
