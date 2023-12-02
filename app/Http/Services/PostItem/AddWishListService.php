@@ -25,14 +25,14 @@ class AddWishListService
                 ]);
     
                 return response([
-                    'status' => 'success',
+                    'status' => 'added',
                     'message' => "Added to wishlist.",
                 ]);
             } else {
                 $checkWishlist->delete();
 
                 return response([
-                    'status' => 'success',
+                    'status' => 'unlist',
                     'message' => "Unlisted to wishlist.",
                 ]);
             }

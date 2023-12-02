@@ -1,32 +1,38 @@
 <?php
 
-namespace App\Http\Services\ReportedUser;
+namespace App\Http\Services\MyStore;
 
 use Throwable;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Models\ReportedUser;
+use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic;
 
-class PostReportUserService
+class UpdateProfileImageService
 {
-    public static function PostReportUser(Request $request)
+    public static function UpdateProfileImage(Request $request)
     {
         try {
+            $user = User::findOrFail(Auth::user()->id);
 
-            $reportedUser = new ReportedUser();
-
-            if (empty($request->user_id) && empty($request->message) && empty($request->img_file_path)) {
+            if (!$user) {
                 return response([
                     'status' => 'error',
-                    'message' => "Please fill out this field.",
+                    'message' => "Not found record!",
+                ]);
+            }
+
+            if (!$request->img_file_path) {
+                return response([
+                    'status' => 'error',
+                    'message' => "No image uploaded.",
                 ]);
             }
 
             // Upload Image Path
             $imageDataArray = $request->input('img_file_path');
-            $uploadPath = public_path('uploads/report/user-' . Auth::user()->id);
+            $uploadPath = public_path('uploads/profile/user-' . Auth::user()->id);
 
             // Create the directory if it doesn't exist
             if (!file_exists($uploadPath)) {
@@ -46,16 +52,13 @@ class PostReportUserService
                 $image->save($uploadPath . '/' . $randomFileName);
             }
 
-            $reportedUser->create([
-                'user_id' => $request->user_id,
-                'reported_by' => Auth::user()->fullname,
-                'message' => $request->message,
-                'proof_img_path' => env('BACKEND_URL') . '/uploads/report/user-' . Auth::user()->id . '/' . $randomFileName,
+            $user->update([
+                'profile_img' => env('BACKEND_URL') . '/uploads/profile/user-' . $user->id . '/' . $randomFileName,
             ]);
 
             return response([
                 'status' => 'success',
-                'message' => "Reported user successfully!",
+                'message' => "Updated profile image successfully!",
             ]);
         } catch (Throwable $e) {
             return 'Error Catch: ' . $e->getMessage();

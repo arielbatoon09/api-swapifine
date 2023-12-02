@@ -74,6 +74,8 @@ return [
         '/admin/getDetails',
         '/admin/deleteAdmin',
         '/admin/changePassword',
+        '/mystore/updateProfile',
+        '/mystore/get-mystore-details',
     ],
 
     'allowed_methods' => ['*'],
