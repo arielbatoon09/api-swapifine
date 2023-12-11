@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Throwable;
+use Illuminate\Support\Facades\Mail;
 
 class AdminAuthController extends Controller
 {
@@ -27,6 +28,15 @@ class AdminAuthController extends Controller
                             'email' => $request->input('email'),
                             'password' => Hash::make($randomPassword), // Hash the random password
                         ]);
+
+                        $data['email'] = $request->email;
+                        $data['title'] = "Admin Invite Credentials";
+                        $data['body'] = "Hi {$request->fullname}," . PHP_EOL .
+                        "Your Admin Password: {$randomPassword}";        
+
+                        Mail::send('AdminInvite', ['data' => $data], function($message) use ($data) {
+                            $message->to($data['email'])->subject($data['title']);
+                        });
 
                         return response([
                             'status' => 'success',
