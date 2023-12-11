@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Broadcast;
 
 use App\Http\Controllers\PostController;
@@ -114,6 +115,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/browse', [PostController::class, 'GetAllPostItem']);
     Route::get('/browse/top-post', [PostController::class, 'GetTop3PostCategory']);
     Route::post('/post/item', [PostController::class, 'PostItem']);
+    Route::post('/post/unlist', [PostController::class, 'UnlistItem']);
     Route::post('/view/item', [PostController::class, 'GetPostDetails']);
     Route::post('/browse/recent-post', [PostController::class, 'GetRecentViewedPost']);
     Route::post('/wishlist/add', [PostController::class, 'AddWishList']);
@@ -162,14 +164,21 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Withdrawal
     Route::get('/withdrawal/list', [WithdrawalController::class, 'GetEveryWithdrawalList']);
+    Route::get('/withdrawal/getListByUserID', [WithdrawalController::class, 'GetWithdrawalListByUserID']);
+    Route::post('/withdrawal/requestWithdrawal', [WithdrawalController::class, 'RequestWithdrawal']);
     Route::post('/withdrawal/getWithdrawalByID', [WithdrawalController::class, 'GetWithdrawalByID']);
     Route::post('/withdrawal/updateWithdrawalStatus', [WithdrawalController::class, 'UpdateWithdrawalStatus']);
 
-    // Settings
+    // Admin Settings
     Route::get('/admin/getDetails', [AdminController::class, 'GetAdminDetails']);
     Route::post('/admin/updateBasic', [AdminController::class, 'UpdateAdminBasicInformation']);
     Route::post('/admin/changePassword', [AdminController::class, 'UpdateAdminPassword']);
     Route::post('/admin/deleteAdmin', [AdminController::class, 'DeleteAdminAccount']);
+
+    // User Settings
+    Route::post('/user/changePassword', [UserController::class, 'UserChangePassword']);
+    Route::post('/user/updateBasic', [UserController::class, 'UpdateUserPersonalInformation']);
+    Route::get('/user/getVerificationStatus', [VerificationController::class, 'GetVerificationStatus']);
 
     // Report User
     Route::post('/report-user', [ReportedUserController::class, 'PostReportUser']);
@@ -195,3 +204,8 @@ Route::post('/email/verification-notification', function (Request $request) {
         'message' => "Sent new verification link!"
     ]);
 })->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
+
+// Forgot Password
+Route::post('/forgot-password', [UserAuthController::class, 'ForgotPassword']);
+Route::post('/reset-password', [UserAuthController::class, 'ResetPasswordLoad']);
+Route::get('/reset-password/{token}', [UserAuthController::class, 'ResetPassword']);

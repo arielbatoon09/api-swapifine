@@ -39,6 +39,7 @@ class GetAllPostItemService
                 'id' => $post->id,
                 'item_name' => $post->item_name,
                 'fullname' => $post->user->fullname,
+                'vendor_profile' => $post->user->profile_img ? $post->user->profile_img : asset("uploads/default_profile.png"),
                 'images' => $post->images,
                 'category_name' => $post->category->category_name,
                 'condition' => $post->condition,

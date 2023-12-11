@@ -35,6 +35,8 @@ class GetPostDetailsService
                     'is_available' => $postWithImages->is_available,
                     'images' => $postWithImages->images,
                     'post_address' => $postWithImages->location->address,
+                    'profile_img' => $postWithImages->user->profile_img ? $postWithImages->user->profile_img : asset("uploads/default_profile.png"),
+                    'is_verified' => $postWithImages->user->verification?->status == 'Approved' ?? false,
                 ];
 
                 return response([

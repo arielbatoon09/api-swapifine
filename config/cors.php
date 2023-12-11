@@ -76,6 +76,13 @@ return [
         '/admin/changePassword',
         '/mystore/updateProfile',
         '/mystore/get-mystore-details',
+        '/post-search',
+        '/withdrawal/getListByUserID',
+        '/withdrawal/requestWithdrawal',
+        '/user/changePassword',
+        '/user/updateBasic',
+        '/user/getVerificationStatus',
+        '/post/unlist',
     ],
 
     'allowed_methods' => ['*'],

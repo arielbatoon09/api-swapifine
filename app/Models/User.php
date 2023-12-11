@@ -58,6 +58,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Post::class, 'id', 'user_id');
     }
+    public function countPost()
+    {
+        return $this->hasMany(Post::class, 'user_id', 'id');
+    }
     public function verification()
     {
         return $this->belongsTo(Verification::class, 'id', 'user_id');

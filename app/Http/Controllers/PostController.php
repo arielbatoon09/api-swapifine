@@ -9,6 +9,8 @@ use App\Http\Services\PostItem\GetPostDetailsService;
 use App\Http\Services\PostItem\GetTop3PostCategoryService;
 use App\Http\Services\PostItem\GetRecentViewedPostService;
 use App\Http\Services\PostItem\AddWishListService;
+use App\Http\Services\PostItem\SearchAutoCompleteService;
+use App\Http\Services\PostItem\UnlistItemService;
 use App\Http\Services\MyStore\GetPostByUserIDService;
 use App\Http\Services\MyStore\GetPostImagesByIDService;
 use App\Http\Services\MyStore\GetWishlistImagesByUserIDService;
@@ -57,6 +59,14 @@ class PostController extends Controller
     public function GetWishlistImagesByID(Request $request)
     {
         return GetWishlistImagesByIDService::GetWishlistImagesByID($request);
+    }
+    public function SearchAutoComplete(Request $request)
+    {
+        return SearchAutoCompleteService::SearchAutoComplete($request);
+    }
+    public function UnlistItem(Request $request)
+    {
+        return UnlistItemService::UnlistItem($request);
     }
 
 }

@@ -13,7 +13,7 @@ class GetMyStoreDetailsService
         try {
 
             $user = Auth::user();
-            $checkUser = User::with(['post', 'ratings', 'verification'])
+            $checkUser = User::with(['countPost', 'ratings', 'verification'])
                 ->find($user->id);
 
             if ($checkUser) {
@@ -22,7 +22,7 @@ class GetMyStoreDetailsService
                     'fullname' => $checkUser->fullname,
                     'wallet' => $checkUser->credits_amount,
                     'profile_img' => $checkUser->profile_img ? $checkUser->profile_img : asset("uploads/default_profile.png"),
-                    'total_post' => $checkUser->post->count(),
+                    'total_post' => $checkUser->countPost ? $checkUser->countPost->count() : 0,
                     'total_ratings' => $checkUser->ratings ? $checkUser->ratings->count() : 0,
                     'is_verified' => $checkUser->verification?->status == 'Approved' ?? false,
                 ];

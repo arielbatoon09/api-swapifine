@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Auth\Events\Registered;
 use App\Models\User;
+use App\Models\PasswordResetModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
+
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Carbon;
 
 class UserAuthController extends Controller
 {
@@ -130,6 +139,87 @@ class UserAuthController extends Controller
                 'status' => 'success',
                 'message' => 'Logout successfully!'
             ])->withCookie($cookie);
+        } catch (Throwable $e) {
+            return 'Error Catch: ' . $e->getMessage();
+        }
+    }
+
+    // Forgot Password
+    public function ForgotPassword(Request $request)
+    {
+        try {
+
+            $user = User::where('email', $request->email)->get();
+
+            if (count($user) > 0) {
+                $token = Str::random(40);
+                $domain = URL::to('/');
+                $url = $domain.'/reset-password?token='.$token;
+
+                $data['url'] = $url;
+                $data['email'] = $request->email;
+                $data['title'] = "Password Reset Notification";
+                $data['body'] = "Kindly click on below link to reset your password.";
+
+                Mail::send('ForgetPasswordMail', ['data' => $data], function($message) use ($data) {
+                    $message->to($data['email'])->subject($data['title']);
+                });
+
+                $dateTime = Carbon::now()->format('Y-m-d H:i:s');
+                PasswordResetModel::updateOrCreate(
+                    ['email' => $request->email],
+                    [
+                        'email' => $request->email,
+                        'token' => $token,
+                        'created_at' => $dateTime,
+                    ]
+                );
+
+                return response([
+                    'status' => 'success',
+                    'message' => 'Please check your mail to reset your password.',
+                ]);
+            } else {
+                return response([
+                    'status' => 'error',
+                    'message' => 'User not found!'
+                ]);
+            }
+
+        } catch (Throwable $e) {
+            return 'Error Catch: ' . $e->getMessage();
+        }
+    }
+    // Reset Password View Load
+    public function ResetPasswordLoad(Request $request)
+    {
+        try {
+            $resetData = PasswordResetModel::where('token', $request->token)->get();
+
+            if (isset($request->token) && count($resetData) > 0) {
+                $user = User::where('email', $resetData[0]['email'])->get();
+                return view('resetPassword', compact('user'));
+            }
+
+        } catch (Throwable $e) {
+            return 'Error Catch: ' . $e->getMessage();
+        }
+    }
+    // Reset Password
+    public function ResetPassword(Request $request)
+    {
+        try {
+            $request->validate([
+                'password' => 'required|string|min:6'
+            ]);
+
+            $user = User::find($request->id);
+            $user->password = $request->password;
+            $user->save();
+
+            PasswordResetModel::where('email', $user->email)->delete();
+            return "<h1>Your password has been reset successfully.</h1>";
+
         } catch (Throwable $e) {
             return 'Error Catch: ' . $e->getMessage();
         }

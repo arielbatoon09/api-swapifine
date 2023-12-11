@@ -7,6 +7,7 @@ use App\Http\Services\Verification\GetEveryVerificationListService;
 use App\Http\Services\Verification\PostVerificationRequestService;
 use App\Http\Services\Verification\GetVerificationListByIDService;
 use App\Http\Services\Verification\UpdateVerificationStatusService;
+use App\Http\Services\Settings\GetVerificationStatusService;
 
 class VerificationController extends Controller
 {
@@ -25,5 +26,9 @@ class VerificationController extends Controller
     public function PostVerificationRequest(Request $request)
     {
         return PostVerificationRequestService::PostVerificationRequest($request);
+    }
+    public function GetVerificationStatus()
+    {
+        return GetVerificationStatusService::GetVerificationStatus();
     }
 }

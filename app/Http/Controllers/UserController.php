@@ -8,6 +8,8 @@ use App\Http\Services\AdminDashboard\TotalNumbersService;
 use App\Http\Services\AdminDashboard\UserManagementService;
 use App\Http\Services\MyStore\UpdateProfileImageService;
 use App\Http\Services\MyStore\GetMyStoreDetailsService;
+use App\Http\Services\Settings\UserChangePasswordService;
+use App\Http\Services\Settings\UpdateUserPersonalInformationService;
 
 class UserController extends Controller
 {
@@ -38,5 +40,13 @@ class UserController extends Controller
     public function GetMyStoreDetails()
     {
         return GetMyStoreDetailsService::GetMyStoreDetails();
+    }
+    public function UserChangePassword(Request $request)
+    {
+        return UserChangePasswordService::UserChangePassword($request);
+    }
+    public function UpdateUserPersonalInformation(Request $request)
+    {
+        return UpdateUserPersonalInformationService::UpdateUserPersonalInformation($request);
     }
 }

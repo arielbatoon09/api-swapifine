@@ -20,8 +20,6 @@ class GetWishlistImagesByUserIDService
             $wishlistData = [];      
 
             foreach ($wishlistWithImages as $wishlist) {
-
-
                 $wishlistData[] = [
                     'id' => $wishlist->id,
                     'item_name' => $wishlist->post->item_name,

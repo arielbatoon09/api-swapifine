@@ -51,7 +51,10 @@ class TapToInquireService
                 $postItemKey = $postItemID->item_key;
 
                 if ($request->post_user_id != self::$getUserID) {
-                    $checkInboxKey = self::$inboxModel->where('from_id', self::$getUserID)->first();
+                    $checkInboxKey = self::$inboxModel
+                        ->where('from_id', self::$getUserID)
+                        ->where('post_item_key', $postItemKey)
+                        ->first();
 
                     if (!$checkInboxKey) {
                         // Store to Inbox
@@ -71,7 +74,7 @@ class TapToInquireService
                             'to_id' => $request->post_user_id,
                             'message' => self::$inquireMsg,
                         ]);
-                        
+
                         return response([
                             'status' => 'success',
                             'message' => "Sent an inquiry!",

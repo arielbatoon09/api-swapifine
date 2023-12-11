@@ -31,8 +31,8 @@ class GetMessagesByIDService
                     'to_user_fullname' => $message->to_user->fullname,
                     'to_user_id' => $message->to_user->id,
                     'message' => $message->message,
-                    'from_user_profile' => $message->from_user->profile_img,
-                    'to_user_profile' => $message->to_user->profile_img,
+                    'from_user_profile' => $message->from_user->profile_img ? $message->from_user->profile_img : asset("uploads/default_profile.png"),
+                    'to_user_profile' => $message->to_user->profile_img ? $message->to_user->profile_img : asset("uploads/default_profile.png"),
                     'created_at' => $message->created_at,
                 ];
             });
