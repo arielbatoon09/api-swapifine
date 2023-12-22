@@ -158,6 +158,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/mystore/user-ratings', [RatingsController::class, 'GetRatingsByUserID']);
     Route::post('/mystore/updateProfile', [UserController::class, 'UpdateProfileImage']);
     Route::get('/mystore/get-mystore-details', [UserController::class, 'GetMyStoreDetails']);
+    Route::post('/view/store', [UserController::class, 'ViewVendorStore']);
 
     // Verification
     Route::post('/verification-request', [VerificationController::class, 'PostVerificationRequest']);

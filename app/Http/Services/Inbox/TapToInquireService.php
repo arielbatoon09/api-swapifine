@@ -50,45 +50,30 @@ class TapToInquireService
             if ($postItemID) {
                 $postItemKey = $postItemID->item_key;
 
-                if ($request->post_user_id != self::$getUserID) {
-                    $checkInboxKey = self::$inboxModel
-                        ->where('from_id', self::$getUserID)
-                        ->where('post_item_key', $postItemKey)
-                        ->first();
+                $checkInboxKey = self::$inboxModel
+                    ->where('from_id', self::$getUserID)
+                    ->where('post_item_key', $postItemKey)
+                    ->first();
 
-                    if (!$checkInboxKey) {
-                        // Store to Inbox
-                        self::$inboxModel->create([
-                            'inbox_key' => self::$secretKey,
-                            'from_id' => self::$getUserID,
-                            'to_id' => $request->post_user_id,
-                            'post_item_key' => $postItemKey,
-                            'read_by_sender' => 0,
-                            'read_by_receiver' => 0,
-                        ]);
+                if (!$checkInboxKey) {
+                    // Store to Inbox
+                    self::$inboxModel->create([
+                        'inbox_key' => $request->input('inbox_key'),
+                        'from_id' => self::$getUserID,
+                        'to_id' => $request->input('to_id'),
+                        'post_item_key' => $postItemKey,
+                        'read_by_sender' => 0,
+                        'read_by_receiver' => 0,
+                    ]);
 
-                        // Open a conversation/message
-                        self::$messageModel->create([
-                            'msg_inbox_key' => self::$secretKey,
-                            'from_id' => self::$getUserID,
-                            'to_id' => $request->post_user_id,
-                            'message' => self::$inquireMsg,
-                        ]);
-
-                        return response([
-                            'status' => 'success',
-                            'message' => "Sent an inquiry!",
-                        ]);
-                    } else {
-                        return response([
-                            'status' => 'error',
-                            'message' => "You have already inquired about this item!",
-                        ]);
-                    }
+                    return response([
+                        'status' => 'success',
+                        'message' => "Sent an inquiry!",
+                    ]);
                 } else {
                     return response([
                         'status' => 'error',
-                        'message' => "You can't inquire with your own listing!",
+                        'message' => "You have already inquired about this item!",
                     ]);
                 }
             } else {

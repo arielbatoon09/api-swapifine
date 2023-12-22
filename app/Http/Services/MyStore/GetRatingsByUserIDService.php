@@ -26,7 +26,7 @@ class GetRatingsByUserIDService
                     'rated_by_fullname' => $rating->ratedBy->fullname,
                     'comment' => $rating->comment,
                     'scale_ratings' => $rating->scale_ratings,
-                    'profile' => $rating->ratedBy->profile_img,
+                    'profile' => $rating->ratedBy->profile_img ? $rating->ratedBy->profile_img : asset("uploads/default_profile.png"),
                     'rated_date' => date('F d, Y', strtotime($rating->created_at)),
                 ];
             }

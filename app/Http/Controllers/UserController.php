@@ -10,6 +10,7 @@ use App\Http\Services\MyStore\UpdateProfileImageService;
 use App\Http\Services\MyStore\GetMyStoreDetailsService;
 use App\Http\Services\Settings\UserChangePasswordService;
 use App\Http\Services\Settings\UpdateUserPersonalInformationService;
+use App\Http\Services\MyStore\ViewVendorStoreService;
 
 class UserController extends Controller
 {
@@ -48,5 +49,9 @@ class UserController extends Controller
     public function UpdateUserPersonalInformation(Request $request)
     {
         return UpdateUserPersonalInformationService::UpdateUserPersonalInformation($request);
+    }
+    public function ViewVendorStore(Request $request)
+    {
+        return ViewVendorStoreService::ViewVendorStore($request);
     }
 }

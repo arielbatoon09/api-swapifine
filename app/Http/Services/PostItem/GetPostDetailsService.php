@@ -23,6 +23,7 @@ class GetPostDetailsService
             if ($postWithImages) {
                 $postData = [
                     'id' => $postWithImages->id,
+                    'post_item_key' => $postWithImages->item_key,
                     'user_id' => $postWithImages->user->id,
                     'fullname' => $postWithImages->user->fullname,
                     'category_name' => $postWithImages->category->category_name,
@@ -34,6 +35,7 @@ class GetPostDetailsService
                     'condition' => $postWithImages->condition,
                     'is_available' => $postWithImages->is_available,
                     'images' => $postWithImages->images,
+                    'thumbnail' => $postWithImages->images[0]->img_file_path,
                     'post_address' => $postWithImages->location->address,
                     'profile_img' => $postWithImages->user->profile_img ? $postWithImages->user->profile_img : asset("uploads/default_profile.png"),
                     'is_verified' => $postWithImages->user->verification?->status == 'Approved' ?? false,

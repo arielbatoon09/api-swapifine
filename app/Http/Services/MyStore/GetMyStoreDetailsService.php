@@ -28,7 +28,6 @@ class GetMyStoreDetailsService
                     'fullname' => $checkUser->fullname,
                     'wallet' => $checkUser->credits_amount,
                     'profile_img' => $checkUser->profile_img ? $checkUser->profile_img : asset("uploads/default_profile.png"),
-                    // 'total_post' => $checkUser->post ? $checkUser->post->count() : 0,
                     'total_post' => $checkPost ? $checkPost->count() : 0,
                     'total_ratings' => $checkUser->ratings ? $checkUser->ratings->count() : 0,
                     'is_verified' => $checkUser->verification?->status == 'Approved' ?? false,

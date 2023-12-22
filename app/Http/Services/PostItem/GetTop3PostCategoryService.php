@@ -60,6 +60,7 @@ class GetTop3PostCategoryService
                     $groupedData[$category_id]['posts'][] = [
                         'id' => $post->id,
                         'item_name' => $post->item_name,
+                        'user_id' => $post->user->id,
                         'fullname' => $post->user->fullname,
                         'vendor_profile' => $post->user->profile_img ? $post->user->profile_img : asset("uploads/default_profile.png"),
                         'images' => $post->images,
