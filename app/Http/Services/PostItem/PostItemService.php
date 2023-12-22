@@ -58,7 +58,7 @@ class PostItemService
                                     return response([
                                         'status' => 'error',
                                         'source' => 'notEligible',
-                                        'message' => "You're not eligible to list items!"
+                                        'message' => "Please verify your account!"
                                     ]);
                                 }
 
