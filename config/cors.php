@@ -18,7 +18,7 @@ return [
     'paths' => [
         '/',
         'api/*', 
-        'sanctum/csrf-cookie',
+        '/sanctum/csrf-cookie',
         '/login',
         'signup',
         'https://api.maptiler.com',
